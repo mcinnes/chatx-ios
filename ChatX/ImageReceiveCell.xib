@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A313a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="imageReceive" rowHeight="167" id="Fbr-zk-fnZ" customClass="ImageTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="168"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Fbr-zk-fnZ" id="FDI-N8-DSN">
+                <frame key="frameInset" width="320" height="167"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZYh-Ik-6Ey" userLabel="Bubble">
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="waq-fn-9DH" userLabel="DownCurve">
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="Fuc-OF-5Bv"/>
+                                    <constraint firstAttribute="width" constant="50" id="eu6-F9-oLo"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="25"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nVh-oL-CzO" userLabel="HidingLayerTop">
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0no-rc-HFD" userLabel="Main">
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="250" text="chatSendNameLabel" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="220" translatesAutoresizingMaskIntoConstraints="NO" id="S3S-GY-cdU">
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="11"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="749" text="chatSendTimeLabel" textAlignment="right" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="220" translatesAutoresizingMaskIntoConstraints="NO" id="9rj-Ux-IWm">
+                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bko-Nj-TJM">
+                                        <frame key="frameInset" minX="7" minY="25" width="121" height="98"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="9rj-Ux-IWm" secondAttribute="bottom" constant="8" id="4hL-Vy-aQJ"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="38" id="6Cb-fa-dVs"/>
+                                    <constraint firstAttribute="trailing" secondItem="S3S-GY-cdU" secondAttribute="trailing" constant="16" id="MaP-wd-jea"/>
+                                    <constraint firstItem="9rj-Ux-IWm" firstAttribute="leading" secondItem="0no-rc-HFD" secondAttribute="leading" constant="16" id="RWF-Pt-FB8"/>
+                                    <constraint firstItem="S3S-GY-cdU" firstAttribute="width" secondItem="0no-rc-HFD" secondAttribute="width" multiplier="1:2" priority="750" id="S2L-PD-yNK"/>
+                                    <constraint firstItem="S3S-GY-cdU" firstAttribute="leading" secondItem="0no-rc-HFD" secondAttribute="leading" constant="16" id="kMY-bY-AmS"/>
+                                    <constraint firstAttribute="trailing" secondItem="9rj-Ux-IWm" secondAttribute="trailing" constant="16" id="qU1-K2-Bc9"/>
+                                    <constraint firstItem="S3S-GY-cdU" firstAttribute="top" secondItem="0no-rc-HFD" secondAttribute="top" constant="8" id="rJD-xK-9PP"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="16"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="MaP-wd-jea"/>
+                                    </mask>
+                                </variation>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UNS-f4-jbS" userLabel="UpCurve">
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="20" id="NA4-2I-I9m"/>
+                                    <constraint firstAttribute="height" constant="32" id="xGU-4j-0Z2"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="39s-SI-fDB" userLabel="HidingLayerSide">
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="MOI-rV-0LS"/>
+                                    <constraint firstAttribute="width" constant="15" id="tfo-Mq-W79"/>
+                                </constraints>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qgw-7H-xED" userLabel="chatSendUserImage">
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="UEY-tD-OrE"/>
+                                    <constraint firstAttribute="width" constant="25" id="qXB-VK-jBu"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <real key="value" value="12.5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="UNS-f4-jbS" secondAttribute="bottom" constant="-1" id="46w-Ix-cIg"/>
+                            <constraint firstAttribute="bottom" secondItem="0no-rc-HFD" secondAttribute="bottom" id="6Bi-Op-iwb"/>
+                            <constraint firstAttribute="bottom" secondItem="39s-SI-fDB" secondAttribute="bottom" id="6KH-vT-Ydm"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="32" id="6NR-l3-BhK"/>
+                            <constraint firstItem="0no-rc-HFD" firstAttribute="top" secondItem="ZYh-Ik-6Ey" secondAttribute="top" id="88i-La-m67"/>
+                            <constraint firstAttribute="bottom" secondItem="qgw-7H-xED" secondAttribute="bottom" id="Bgw-Hk-kkZ"/>
+                            <constraint firstAttribute="trailing" secondItem="UNS-f4-jbS" secondAttribute="trailing" constant="10" id="Cwa-Y5-MAj"/>
+                            <constraint firstAttribute="bottom" secondItem="nVh-oL-CzO" secondAttribute="bottom" constant="20" id="FgB-79-QW5"/>
+                            <constraint firstAttribute="trailing" secondItem="qgw-7H-xED" secondAttribute="trailing" id="GST-FE-QJ9"/>
+                            <constraint firstItem="waq-fn-9DH" firstAttribute="leading" secondItem="0no-rc-HFD" secondAttribute="trailing" constant="-20" id="Y04-Nr-sby"/>
+                            <constraint firstAttribute="trailing" secondItem="nVh-oL-CzO" secondAttribute="trailing" id="cAG-9L-tvR"/>
+                            <constraint firstItem="nVh-oL-CzO" firstAttribute="top" secondItem="ZYh-Ik-6Ey" secondAttribute="top" id="cgO-dm-Lx5"/>
+                            <constraint firstItem="UNS-f4-jbS" firstAttribute="leading" secondItem="0no-rc-HFD" secondAttribute="trailing" id="cuC-bQ-I3v"/>
+                            <constraint firstItem="nVh-oL-CzO" firstAttribute="leading" secondItem="ZYh-Ik-6Ey" secondAttribute="leading" id="eHn-Pl-rJ0"/>
+                            <constraint firstAttribute="trailing" secondItem="39s-SI-fDB" secondAttribute="trailing" id="gZF-DT-G1f"/>
+                            <constraint firstItem="0no-rc-HFD" firstAttribute="leading" secondItem="ZYh-Ik-6Ey" secondAttribute="leading" id="t8Z-aI-etj"/>
+                            <constraint firstAttribute="centerY" secondItem="0no-rc-HFD" secondAttribute="centerY" id="tsT-mM-YMj"/>
+                            <constraint firstAttribute="bottom" secondItem="waq-fn-9DH" secondAttribute="bottom" id="z1r-KD-Rix"/>
+                            <constraint firstAttribute="trailing" secondItem="waq-fn-9DH" secondAttribute="trailing" id="z6s-dO-NxY"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="ZYh-Ik-6Ey" firstAttribute="top" secondItem="FDI-N8-DSN" secondAttribute="topMargin" constant="8" id="5XF-uw-qgA"/>
+                    <constraint firstAttribute="bottom" secondItem="ZYh-Ik-6Ey" secondAttribute="bottom" constant="8" id="8fu-pi-QSA"/>
+                    <constraint firstItem="ZYh-Ik-6Ey" firstAttribute="top" secondItem="FDI-N8-DSN" secondAttribute="top" constant="8" id="fTP-y3-9sn"/>
+                    <constraint firstAttribute="trailing" secondItem="ZYh-Ik-6Ey" secondAttribute="trailing" constant="8" id="z94-Uf-O1k"/>
+                </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="5XF-uw-qgA"/>
+                    </mask>
+                </variation>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="chatNameLabel" destination="S3S-GY-cdU" id="4pn-hd-md8"/>
+                <outlet property="chatUserImage" destination="bko-Nj-TJM" id="Q8A-2l-ORZ"/>
+            </connections>
+            <point key="canvasLocation" x="-390" y="404"/>
+        </tableViewCell>
+    </objects>
+</document>
