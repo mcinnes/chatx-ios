@@ -254,7 +254,18 @@
                 }
             }];
         }
+    }progressBlock:^(int percentDone) {
+        UIView *paintView=[[UIView alloc]initWithFrame:CGRectMake(0, self.navigationController.navigationBar.frame.size.height, self.view.frame.size.width, 50)];
+        [paintView setBackgroundColor:[UIColor yellowColor]];
+        UIProgressView *progressView = [[UIProgressView alloc] init];
+        progressView.frame = CGRectMake(0,0,self.view.frame.size.width,30);
+        [paintView addSubview:progressView];
+        
+        [self.view addSubview:paintView];
+        progressView.progress = (float)percentDone;
+        NSLog(@"%d", percentDone);
     }];
+
     
 }
 
@@ -323,7 +334,7 @@
                 UIImage *demoImage = [UIImage imageWithData:data];
                 
                 Text_MessageObject *messageObj = [[Text_MessageObject alloc]initMessageWithName:tempDict[@"nickname"] message:nil time:nil type:@"image" userId:nil image:demoImage];
-                NSLog(@"%@", data);
+                //NSLog(@"%@", data);
                 
                 [self updateTableView:messageObj];
 
@@ -481,7 +492,6 @@
         
         _imageCell.messageImage.image = message.image;
         _imageCell.chatNameLabel.text = message.nickname;
-        _imageCell.backgroundColor = [UIColor redColor];
         //_chatCell.chatTimeLabel.text = message.userTime;
         
         //_imageCell.chatUserImage.image = [UIImage imageNamed:@"defaultUser"];
