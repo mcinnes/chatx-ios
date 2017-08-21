@@ -11,6 +11,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface Menu : UITableViewController
+@interface Menu : UITableViewController <UITableViewDelegate, UITableViewDataSource>
 
 @end

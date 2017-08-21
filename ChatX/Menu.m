@@ -22,26 +22,29 @@
     
     KYDrawerController *elDrawer = (KYDrawerController*)self.navigationController.parentViewController;
     
+    NSLog(@"indexpath.row: %ld", (long)newIndexPath.row);
+    
+    //Case statement here to switch the things
     
      //elDrawer.mainViewController=navController;
     [elDrawer setDrawerState:KYDrawerControllerDrawerStateClosed animated:YES];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    //CardCell *cell = (CardCell *)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
-  
-    
-    static NSString *identifier = @"CardCell";
-    
-    CardCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-    
-    if (!cell) {
-        cell = [[CardCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-    }
-
-    cell.messageLabel.text = [NSString stringWithFormat:@"Welcome back, %@", [[PFUser currentUser]objectId]];
-//NSLog(@"%@", [[PFUser currentUser]objectId]);
-    return cell;
-}
+//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    //CardCell *cell = (CardCell *)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+//  
+//    
+//    static NSString *identifier = @"CardCell";
+//    
+//    CardCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+//    
+//    if (!cell) {
+//        cell = [[CardCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+//    }
+//
+//    cell.messageLabel.text = [NSString stringWithFormat:@"Welcome back, %@", [[PFUser currentUser]objectId]];
+//        //NSLog(@"%@", [[PFUser currentUser]objectId]);
+//    return cell;
+//    
+//}
 @end

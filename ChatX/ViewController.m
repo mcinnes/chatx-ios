@@ -29,12 +29,14 @@
         logInController.logInView.logo = nil;
         logInController.fields = PFLogInFieldsUsernameAndPassword | PFLogInFieldsFacebook | PFLogInFieldsSignUpButton | PFLogInFieldsDismissButton;
         
-        [self presentViewController:logInController animated:true completion:nil];
+        //[self presentViewController:logInController animated:true completion:nil];
     }
-    
    
 //
-    // Do any additional setup after loading the view, typically from a nib.
+    [PFUser logOut];
+    [PFUser logInWithUsernameInBackground:@"brad" password:@"indiana1"];
+    
+           // Do any additional setup after loading the view, typically from a nib.
 }
 -(IBAction)openMenu:(id)sender{
     

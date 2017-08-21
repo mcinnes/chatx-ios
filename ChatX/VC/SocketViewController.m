@@ -4,7 +4,7 @@
 //
 //  Created by Matt McInnes on 27/3/17.
 //  Copyright © 2017 Matt McInnes. All rights reserved.
-//
+// this file needs to be re-written as it is more of a POC than a finalised product
 
 #import "SocketViewController.h"
 #import "SocketIOPacket.h"
@@ -13,9 +13,9 @@
 #import <Parse/Parse.h>
 #import "Text-MessageObject.h"
 #import "ContentView.h"
-#import "ChatTableViewCell.h"
+#import "ChatTableViewCellXIB.h"
 #import "ChatCellSettings.h"
-#import "Image-MessageObject.h"
+//#import "Image-MessageObject.h"
 #import "ImageTableViewCell.h"
 #import "ChatSettingsViewController.h"
 
@@ -33,7 +33,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentViewHeightConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentViewBottomConstraint;
 
-@property (strong,nonatomic) ChatTableViewCell *chatCell;
+@property (strong,nonatomic) ChatTableViewCellXIB *chatCell;
 @property (strong,nonatomic) ImageTableViewCell *imageCell;
 
 //@property (strong,nonatomic) ChatTableViewCellXIB *chatCell;
@@ -47,15 +47,18 @@
     BOOL photoMessage;
     NSData *imageData;
     ChatCellSettings *chatCellSettings;
-
+    
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    //self.yPositionStore = _tb.frame.origin.y;
+
     UIButton* infoButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
     UIBarButtonItem *modalButton = [[UIBarButtonItem alloc] initWithCustomView:infoButton];
-    [modalButton setAction:@selector(showSettings)];
+    [modalButton setTarget:self];
+    [modalButton setAction:@selector(showSettings:)];
+    
     [self.navigationItem setRightBarButtonItem:modalButton animated:YES];
 
     _conversationObjects = [NSMutableArray new];
@@ -65,30 +68,11 @@
     socketIO = [[SocketIO alloc] initWithDelegate:self];
     
     // connect to the socket.io server that is running locally at port 3000
-    [socketIO connectToHost:@"10.140.22.78" onPort:3000];
+    [socketIO connectToHost:@"59.191.208.17" onPort:3000];
     
     [self downloadPreviousMessages];
     
     chatCellSettings = [ChatCellSettings getInstance];
-    
-    [chatCellSettings setSenderBubbleColorHex:@"007AFF"];
-    [chatCellSettings setReceiverBubbleColorHex:@"DFDEE5"];
-    [chatCellSettings setSenderBubbleNameTextColorHex:@"FFFFFF"];
-    [chatCellSettings setReceiverBubbleNameTextColorHex:@"000000"];
-    [chatCellSettings setSenderBubbleMessageTextColorHex:@"FFFFFF"];
-    [chatCellSettings setReceiverBubbleMessageTextColorHex:@"000000"];
-    [chatCellSettings setSenderBubbleTimeTextColorHex:@"FFFFFF"];
-    [chatCellSettings setReceiverBubbleTimeTextColorHex:@"000000"];
-    
-    [chatCellSettings setSenderBubbleFontWithSizeForName:[UIFont boldSystemFontOfSize:11]];
-    [chatCellSettings setReceiverBubbleFontWithSizeForName:[UIFont boldSystemFontOfSize:11]];
-    [chatCellSettings setSenderBubbleFontWithSizeForMessage:[UIFont systemFontOfSize:14]];
-    [chatCellSettings setReceiverBubbleFontWithSizeForMessage:[UIFont systemFontOfSize:14]];
-    [chatCellSettings setSenderBubbleFontWithSizeForTime:[UIFont systemFontOfSize:11]];
-    [chatCellSettings setReceiverBubbleFontWithSizeForTime:[UIFont systemFontOfSize:11]];
-    
-    [chatCellSettings senderBubbleTailRequired:YES];
-    [chatCellSettings receiverBubbleTailRequired:YES];
 
     UINib *nib = [UINib nibWithNibName:@"ChatSendCell" bundle:nil];
      
@@ -109,6 +93,7 @@
     //Setting the minimum and maximum number of lines for the textview vertical expansion
     [self.handler updateMinimumNumberOfLines:1 andMaximumNumberOfLine:3];
     
+    //Pin toolbar hopefully
 
     
     //Tap gesture on table view so that when someone taps on it, the keyboard is hidden
@@ -135,7 +120,7 @@
         for (PFObject *object in [messages reverseObjectEnumerator]) {
             //_textView.text = [_textView.text stringByAppendingString:[NSString stringWithFormat:@"%@: %@\n\n", object[@"nickname"], object[@"msg"]]];
             
-            Text_MessageObject *messageObj = [[Text_MessageObject alloc]initMessageWithName:object[@"nickname"] message:object[@"msg"] time:nil type:nil userId:object[@"userId"]];
+            Text_MessageObject *messageObj = [[Text_MessageObject alloc]initMessageWithName:object[@"nickname"] message:object[@"msg"] time:nil type:@"text" userId:object[@"userId"] image:NULL];
             [self updateTableView:messageObj];
             
         }
@@ -191,8 +176,7 @@
     
 }
 
--(void) updateTableView:(Text_MessageObject *)msg
-{
+-(void) updateTableView:(Text_MessageObject *)msg {
     [self.messageText setText:@""];
     //[self.handler textViewDidChange:self.messageText];
     
@@ -213,21 +197,22 @@
         [self.tableView scrollToRowAtIndexPath:ip atScrollPosition:UITableViewScrollPositionBottom animated:UITableViewRowAnimationLeft];
     }
 }
+
 - (IBAction)snemess:(id)sender {
     
+    NSLog(@"Current User: %@",[PFUser currentUser]);
    
     if (photoMessage) {
         [self createImageMessage];
         photoMessage = nil;
     } else {
+        
         NSMutableDictionary *dict = [NSMutableDictionary dictionary];
         [dict setObject:self.messageText.text forKey:@"msg"];
         [dict setObject:[[PFUser currentUser]objectId] forKey:@"name"];
         [dict setObject:[PFUser currentUser][@"nickname"] forKey:@"nickname"];
         [dict setObject:[[PFUser currentUser] objectId] forKey:@"userId"];
         [dict setObject:_roomNumber forKey:@"roomNumber"];
-
-        //[dict setObject:@" forKey:@"nickname"];
 
         //send event is like emit
         [socketIO sendEvent:@"send" withData:dict];
@@ -324,7 +309,6 @@
     }
     else if ([packet.name isEqualToString:@"image"]){
         
-        
         PFQuery *query1 = [PFQuery queryWithClassName:@"images"];
         
         [query1 getObjectInBackgroundWithId:tempDict[@"image"] block:^(PFObject *imageObject, NSError *error) {
@@ -335,11 +319,13 @@
                 if (!data) {
                     return NSLog(@"%@", error);
                 }
+                NSLog(@"Image Downloaded");
+                UIImage *demoImage = [UIImage imageWithData:data];
                 
-                // Do something with the image
-               // self.testImageView.image = [UIImage imageWithData:data];
-                Image_MessageObject *imageMessage = [[Image_MessageObject alloc]initMessageWithName:tempDict[@"nickname"] image:data time:nil type:nil userId:tempDict[@"userId"]];
-                [self updateTableView:imageMessage];
+                Text_MessageObject *messageObj = [[Text_MessageObject alloc]initMessageWithName:tempDict[@"nickname"] message:nil time:nil type:@"image" userId:nil image:demoImage];
+                NSLog(@"%@", data);
+                
+                [self updateTableView:messageObj];
 
             }];
             
@@ -350,20 +336,30 @@
         
         NSString *adString = [IODProfanityFilter stringByFilteringString:[NSString stringWithFormat:@"Advertisment:\n %@\n\n", tempDict[@"msg"]]];
         
-        Text_MessageObject *messageObj = [[Text_MessageObject alloc]initMessageWithName:tempDict[@"source"] message:adString time:nil type:nil userId:tempDict[@"userId"]];
-        
-        
+        Text_MessageObject *messageObj = [[Text_MessageObject alloc]initMessageWithName:tempDict[@"source"] message:adString time:nil type:@"advertisment" userId:tempDict[@"userId"] image:NULL];
+
         
         //[_conversationObjects addObject:messageObj];
         
         [self updateTableView:messageObj];
+        
+        //callback to server
+         [PFCloud callFunctionInBackground:@"advertismentCallback"
+                            withParameters:@{@"adID":@"demoID", @"userID":[[PFUser currentUser]objectId]}
+                                    block:^(NSString *success, NSError *error) {
+                                    if (!error) {
+                                        NSLog(@"%@", success);
+                                    }
+         }];
+        
+
 
     }
     else if ([packet.name isEqualToString:@"chat"]){
         NSLog(@"tempdict: %@", tempDict);
         NSString *msg = [IODProfanityFilter stringByFilteringString:tempDict[@"msg"]];
         
-        Text_MessageObject *messageObj = [[Text_MessageObject alloc]initMessageWithName:tempDict[@"nickname"] message:msg time:nil type:nil userId:tempDict[@"userId"]];
+        Text_MessageObject *messageObj = [[Text_MessageObject alloc]initMessageWithName:tempDict[@"nickname"] message:msg time:tempDict[@"createdAt"] type:@"text" userId:tempDict[@"userId"] image:NULL];
         
        
         
@@ -417,7 +413,28 @@
                                    NSLog(@"Alert did hide.");
                                }];
 }
+- (IBAction)removeFromSuper:(id)sender {
+  //  [_tb removeFromSuperview];
+    //self.messageText.inputAccessoryView = _tb;
 
+}
+- (void)keyboardWasShown:(NSNotification*)aNotification
+{
+    NSDictionary* info = [aNotification userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    CGRect newFrame = _tb.frame;
+    newFrame.origin.y = [UIScreen mainScreen].bounds.size.height - kbSize.height - newFrame.size.height;
+    _tb.frame = newFrame;
+    
+}
+
+- (void)keyboardWillBeHidden:(NSNotification*)aNotification
+{
+    CGRect newFrame = _tb.frame;
+    //newFrame.origin.y = self.yPositionStore;
+   // self.toolBar.frame = newFrame;
+    
+}
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
     UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
@@ -451,65 +468,75 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+
     Text_MessageObject *message = [_conversationObjects objectAtIndex:indexPath.row];
     
-    if ([[_conversationObjects objectAtIndex:indexPath.row] isKindOfClass:[Image_MessageObject class]]){
-        Image_MessageObject *message = [_conversationObjects objectAtIndex:indexPath.row];
+    if ([message.messageType isEqualToString:@"image"]){
+        
 
         _imageCell = (ImageTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"imageReceive"];
-        //chatCell = (ChatTableViewCellXIB *)[tableView dequeueReusableCellWithIdentifier:@"chatSend"];
         
-        _imageCell.messageImage.image = [UIImage imageWithData:message.image];
+        _imageCell.selectionStyle = UITableViewCellSelectionStyleNone;
+
         
+        _imageCell.messageImage.image = message.image;
         _imageCell.chatNameLabel.text = message.nickname;
-        
+        _imageCell.backgroundColor = [UIColor redColor];
         //_chatCell.chatTimeLabel.text = message.userTime;
         
         //_imageCell.chatUserImage.image = [UIImage imageNamed:@"defaultUser"];
+        return _imageCell;
         
     }
     else if([message.userId isEqualToString:[[PFUser currentUser]objectId]])
     {
-        /*Uncomment second line and comment first to use XIB instead of code*/
-        _chatCell = (ChatTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"chatSend"];
-        //chatCell = (ChatTableViewCellXIB *)[tableView dequeueReusableCellWithIdentifier:@"chatSend"];
+       
+        _chatCell = (ChatTableViewCellXIB *)[tableView dequeueReusableCellWithIdentifier:@"chatSend"];
         
         _chatCell.chatMessageLabel.text = message.message;
         
         _chatCell.chatNameLabel.text = message.nickname;
-        
+        _chatCell.selectionStyle = UITableViewCellSelectionStyleNone;
+
         //_chatCell.chatTimeLabel.text = message.userTime;
-        
+        //_chatCell.chatBackground.backgroundColor = [UIColor redColor];
+
         _chatCell.chatUserImage.image = [UIImage imageNamed:@"defaultUser"];
-        [chatCellSettings setReceiverBubbleColor:[UIColor redColor]];        /*Comment this line is you are using XIB*/
-        //_chatCell.authorType = iMessageBubbleTableViewCellAuthorTypeSender;
+        return _chatCell;
+
     }
     else
     {
         /*Uncomment second line and comment first to use XIB instead of code*/
-        _chatCell = (ChatTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"chatReceive"];
-        //chatCell = (ChatTableViewCellXIB *)[tableView dequeueReusableCellWithIdentifier:@"chatReceive"];
+        //_chatCell = (ChatTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"chatReceive"];
+        
+        _chatCell = (ChatTableViewCellXIB *)[tableView dequeueReusableCellWithIdentifier:@"chatReceive"];
         
         _chatCell.chatMessageLabel.text = message.message;
         
         _chatCell.chatNameLabel.text = message.nickname;
         
-        //_chatCell.chatTimeLabel.text = message.userTime;
+        _chatCell.chatTimeLabel.text = message.time;
         
         _chatCell.chatUserImage.image = [UIImage imageNamed:@"defaultUser"];
         
+        if ([message.messageType isEqualToString:@"advertisment"]) {
+#warning To Fix Background
+            //_chatCell.chatBackground.backgroundColor = [UIColor redColor];
+        }
+        return _chatCell;
+
         /*Comment this line is you are using XIB*/
         //_chatCell.authorType = iMessageBubbleTableViewCellAuthorTypeReceiver;
     }
     
-    return _chatCell;
     
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    Image_MessageObject *message = [_conversationObjects objectAtIndex:indexPath.row];
+    Text_MessageObject *message = [_conversationObjects objectAtIndex:indexPath.row];
     
     CGSize size;
     
@@ -556,19 +583,20 @@
     
     size.height = Messagesize.height + Namesize.height + Timesize.height + 48.0f;
     
-    return size.height;
+    //return size.height;
+    return 150.0f;
 }
 
--(void)showSettings{
+-(IBAction)showSettings:(id)sender{
     NSLog(@"Modal");
+    
     [self performSegueWithIdentifier:@"settings" sender:self];
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([segue.identifier isEqualToString:@"settings"]) {
         ChatSettingsViewController *settingsVC = segue.destinationViewController;
-        settingsVC.chatID = _roomNumber;
-        
+        [settingsVC setChatID:_roomNumber];
     }
 }
 

@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import <Parse/Parse.h>
-
+#import <GooglePlaces/GooglePlaces.h>
 @interface AppDelegate ()
 
 @end
@@ -24,8 +24,31 @@
         configuration.server = @"http://104.199.230.2/parse";
     }]];
     
+    [GMSPlacesClient provideAPIKey:@"AIzaSyDXvzPuXSuzC4VaG0ArCof-ExZ1FPOyT_I"];
+    
+//    UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound);
+//    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:userNotificationTypes  categories:nil];
+//    [application registerUserNotificationSettings:settings];
+//    [application registerForRemoteNotifications];
+    
     return YES;
 }
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+    
+    NSLog(@"host: %@", [url host]);
+    
+    //host is the id of the chat
+    //make the chat screen open
+    
+    
+    return YES;
+}
+//- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+//    // Store the deviceToken in the current Installation and save it to Parse
+//    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+//    [currentInstallation setDeviceTokenFromData:deviceToken];
+//    [currentInstallation saveInBackground];
+//}
 
 
 - (void)applicationWillResignActive:(UIApplication *)application {

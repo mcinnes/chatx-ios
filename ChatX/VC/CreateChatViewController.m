@@ -10,7 +10,7 @@
 #import <Parse/Parse.h>
 #import <RKTagsView.h>
 #import "RKCustomButton.h"
-
+#import <GooglePlaces/GooglePlaces.h>
 @interface CreateChatViewController () <UITextFieldDelegate, RKTagsViewDelegate>
 
 @property (weak, nonatomic) IBOutlet RKTagsView *tagsView;
@@ -20,6 +20,9 @@
 @implementation CreateChatViewController {
     CLLocationManager *locationManager;
     CLLocation *location;
+    GMSPlacesClient *_placesClient;
+
+    __weak IBOutlet UIImageView *imageView;
 }
 
 - (void)viewDidLoad {
@@ -38,8 +41,59 @@
     
     location = [locationManager location];
     
+    _placesClient = [GMSPlacesClient sharedClient];
+
+    [_placesClient currentPlaceWithCallback:^(GMSPlaceLikelihoodList *likelihoodList, NSError *error) {
+        if (error != nil) {
+            NSLog(@"Current Place error %@", [error localizedDescription]);
+            return;
+        }
+        
+        //for (GMSPlaceLikelihood *likelihood in likelihoodList.likelihoods) {
+            GMSPlaceLikelihood *likelihood = likelihoodList.likelihoods[0];
+            GMSPlace* place = likelihood.place;
+            NSLog(@"Current Place name %@ at likelihood %g", place.name, likelihood.likelihood);
+            NSLog(@"Current Place address %@", place.formattedAddress);
+            NSLog(@"Current Place attributions %@", place.attributions);
+            NSLog(@"Current PlaceID %@", place.placeID);
+            _nameTextField.text = [NSString stringWithFormat:@"%@ Chat", place.name];
+       // }
+        
+        
+        [_placesClient lookUpPhotosForPlaceID:place.placeID callback:^(GMSPlacePhotoMetadataList *_Nullable photos ,NSError *_Nullable error) {
+            NSLog(@"Res: %@", photos.results);
+            if (error) {
+                 // TODO: handle the error.
+                 NSLog(@"Error: %@", [error description]);
+             } else {
+                 if (photos.results.count > 0) {
+                     GMSPlacePhotoMetadata *firstPhoto = photos.results.firstObject;
+                     NSLog(@"Photos.Results: %@", photos.results);
+                     [self loadImageForMetadata:firstPhoto];
+                 }
+             }
+         }];
+    }];
+    
+   
+    
     _locationLabel.text = [NSString stringWithFormat:@"%f, %f", location.coordinate.latitude, location.coordinate.longitude];
     // Do any additional setup after loading the view.
+}
+
+- (void)loadImageForMetadata:(GMSPlacePhotoMetadata *)photoMetadata {
+   [_placesClient loadPlacePhoto:photoMetadata
+     constrainedToSize:imageView.bounds.size
+     scale:imageView.window.screen.scale
+     callback:^(UIImage *_Nullable photo, NSError *_Nullable error) {
+         if (error) {
+             // TODO: handle the error.
+             NSLog(@"Error: %@", [error description]);
+         } else {
+             imageView.image = photo;
+             //self.attributionTextView.attributedText = photoMetadata.attributions;
+         }
+     }];
 }
 
 -(IBAction)create:(id)sender{

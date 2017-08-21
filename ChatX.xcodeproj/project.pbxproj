@@ -8,50 +8,57 @@
 
 /* Begin PBXBuildFile section */
 		4B707871CC2D7481A46ADE95 /* libPods-ChatX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DEEC1907138EDE16A4FCB197 /* libPods-ChatX.a */; };
-		C9187AC01EBC3F1D009B23A8 /* Menu.m in Sources */ = {isa = PBXBuildFile; fileRef = C9187ABE1EBC3F1D009B23A8 /* Menu.m */; };
-		C9187AC81EBC3F3A009B23A8 /* KYDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9187AC31EBC3F3A009B23A8 /* KYDrawerController.m */; };
-		C9187AC91EBC3F3A009B23A8 /* KYEmbedDrawerControllerSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = C9187AC51EBC3F3A009B23A8 /* KYEmbedDrawerControllerSegue.m */; };
-		C9187ACA1EBC3F3A009B23A8 /* KYEmbedMainControllerSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = C9187AC71EBC3F3A009B23A8 /* KYEmbedMainControllerSegue.m */; };
-		C92A226D1E867B0D0080C1D5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C92A226C1E867B0D0080C1D5 /* main.m */; };
-		C92A22701E867B0D0080C1D5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C92A226F1E867B0D0080C1D5 /* AppDelegate.m */; };
-		C92A22731E867B0D0080C1D5 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C92A22721E867B0D0080C1D5 /* ViewController.m */; };
+		C9187AC01EBC3F1D009B23A8 /* Menu.m in Sources */ = {isa = PBXBuildFile; fileRef = C9187ABE1EBC3F1D009B23A8 /* Menu.m */; settings = {COMPILER_FLAGS = "-v"; }; };
+		C9187AC81EBC3F3A009B23A8 /* KYDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9187AC31EBC3F3A009B23A8 /* KYDrawerController.m */; settings = {COMPILER_FLAGS = "-v"; }; };
+		C9187AC91EBC3F3A009B23A8 /* KYEmbedDrawerControllerSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = C9187AC51EBC3F3A009B23A8 /* KYEmbedDrawerControllerSegue.m */; settings = {COMPILER_FLAGS = "-v"; }; };
+		C9187ACA1EBC3F3A009B23A8 /* KYEmbedMainControllerSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = C9187AC71EBC3F3A009B23A8 /* KYEmbedMainControllerSegue.m */; settings = {COMPILER_FLAGS = "-v"; }; };
+		C92A226D1E867B0D0080C1D5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C92A226C1E867B0D0080C1D5 /* main.m */; settings = {COMPILER_FLAGS = "-v"; }; };
+		C92A22701E867B0D0080C1D5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C92A226F1E867B0D0080C1D5 /* AppDelegate.m */; settings = {COMPILER_FLAGS = "-v"; }; };
+		C92A22731E867B0D0080C1D5 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C92A22721E867B0D0080C1D5 /* ViewController.m */; settings = {COMPILER_FLAGS = "-v"; }; };
 		C92A22761E867B0D0080C1D5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C92A22741E867B0D0080C1D5 /* Main.storyboard */; };
 		C92A22781E867B0D0080C1D5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C92A22771E867B0D0080C1D5 /* Assets.xcassets */; };
 		C92A227B1E867B0D0080C1D5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C92A22791E867B0D0080C1D5 /* LaunchScreen.storyboard */; };
 		C92A22831E867CD10080C1D5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C92A22821E867CD10080C1D5 /* GoogleService-Info.plist */; };
-		C92A22861E87F7550080C1D5 /* NearMeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C92A22851E87F7550080C1D5 /* NearMeViewController.m */; };
+		C92A22861E87F7550080C1D5 /* NearMeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C92A22851E87F7550080C1D5 /* NearMeViewController.m */; settings = {COMPILER_FLAGS = "-v"; }; };
 		C92A22881E87F79C0080C1D5 /* empire.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C92A22871E87F79C0080C1D5 /* empire.jpg */; };
-		C92A228B1E88C7450080C1D5 /* SocketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C92A228A1E88C7450080C1D5 /* SocketViewController.m */; };
-		C92A22971E88C8340080C1D5 /* SocketIOTransportXHR.m in Sources */ = {isa = PBXBuildFile; fileRef = C92A228C1E88C8340080C1D5 /* SocketIOTransportXHR.m */; };
-		C92A22981E88C8340080C1D5 /* SocketIOTransportWebsocket.m in Sources */ = {isa = PBXBuildFile; fileRef = C92A228E1E88C8340080C1D5 /* SocketIOTransportWebsocket.m */; };
-		C92A22991E88C8340080C1D5 /* SocketIOPacket.m in Sources */ = {isa = PBXBuildFile; fileRef = C92A22911E88C8340080C1D5 /* SocketIOPacket.m */; };
-		C92A229A1E88C8340080C1D5 /* SocketIOJSONSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = C92A22931E88C8340080C1D5 /* SocketIOJSONSerialization.m */; };
-		C92A229B1E88C8340080C1D5 /* SocketIO.m in Sources */ = {isa = PBXBuildFile; fileRef = C92A22951E88C8340080C1D5 /* SocketIO.m */; };
-		C92A22A41E88C84D0080C1D5 /* base64.c in Sources */ = {isa = PBXBuildFile; fileRef = C92A229D1E88C84D0080C1D5 /* base64.c */; };
-		C92A22A51E88C84D0080C1D5 /* NSData+SRB64Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = C92A22A01E88C84D0080C1D5 /* NSData+SRB64Additions.m */; };
-		C92A22A61E88C84D0080C1D5 /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = C92A22A31E88C84D0080C1D5 /* SRWebSocket.m */; };
+		C92A228B1E88C7450080C1D5 /* SocketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C92A228A1E88C7450080C1D5 /* SocketViewController.m */; settings = {COMPILER_FLAGS = "-v"; }; };
+		C92A22971E88C8340080C1D5 /* SocketIOTransportXHR.m in Sources */ = {isa = PBXBuildFile; fileRef = C92A228C1E88C8340080C1D5 /* SocketIOTransportXHR.m */; settings = {COMPILER_FLAGS = "-v"; }; };
+		C92A22981E88C8340080C1D5 /* SocketIOTransportWebsocket.m in Sources */ = {isa = PBXBuildFile; fileRef = C92A228E1E88C8340080C1D5 /* SocketIOTransportWebsocket.m */; settings = {COMPILER_FLAGS = "-v"; }; };
+		C92A22991E88C8340080C1D5 /* SocketIOPacket.m in Sources */ = {isa = PBXBuildFile; fileRef = C92A22911E88C8340080C1D5 /* SocketIOPacket.m */; settings = {COMPILER_FLAGS = "-v"; }; };
+		C92A229A1E88C8340080C1D5 /* SocketIOJSONSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = C92A22931E88C8340080C1D5 /* SocketIOJSONSerialization.m */; settings = {COMPILER_FLAGS = "-v"; }; };
+		C92A229B1E88C8340080C1D5 /* SocketIO.m in Sources */ = {isa = PBXBuildFile; fileRef = C92A22951E88C8340080C1D5 /* SocketIO.m */; settings = {COMPILER_FLAGS = "-v"; }; };
+		C92A22A41E88C84D0080C1D5 /* base64.c in Sources */ = {isa = PBXBuildFile; fileRef = C92A229D1E88C84D0080C1D5 /* base64.c */; settings = {COMPILER_FLAGS = "-v"; }; };
+		C92A22A51E88C84D0080C1D5 /* NSData+SRB64Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = C92A22A01E88C84D0080C1D5 /* NSData+SRB64Additions.m */; settings = {COMPILER_FLAGS = "-v"; }; };
+		C92A22A61E88C84D0080C1D5 /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = C92A22A31E88C84D0080C1D5 /* SRWebSocket.m */; settings = {COMPILER_FLAGS = "-v"; }; };
 		C92A22A91E88CB240080C1D5 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C92A22A81E88CB240080C1D5 /* libicucore.tbd */; };
-		C9886DDB1E9BAFF90042C5E4 /* ContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = C9886DDA1E9BAFF90042C5E4 /* ContentView.m */; };
-		C9886DE21E9BB0140042C5E4 /* ChatTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C9886DDF1E9BB0140042C5E4 /* ChatTableViewCell.m */; };
-		C9886DE31E9BB0140042C5E4 /* ChatCellSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = C9886DE11E9BB0140042C5E4 /* ChatCellSettings.m */; };
-		C9886DE71EA8CCBC0042C5E4 /* Image-MessageObject.m in Sources */ = {isa = PBXBuildFile; fileRef = C9886DE61EA8CCBC0042C5E4 /* Image-MessageObject.m */; };
-		C9886DED1EA8CDBA0042C5E4 /* ChatTableViewCellXIB.m in Sources */ = {isa = PBXBuildFile; fileRef = C9886DE91EA8CDBA0042C5E4 /* ChatTableViewCellXIB.m */; };
-		C9886DEE1EA8CDBA0042C5E4 /* ChatSendCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9886DEA1EA8CDBA0042C5E4 /* ChatSendCell.xib */; };
-		C9886DEF1EA8CDBA0042C5E4 /* ChatReceiveCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9886DEB1EA8CDBA0042C5E4 /* ChatReceiveCell.xib */; };
-		C9886DF11EA8CEA80042C5E4 /* ImageReceiveCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9886DF01EA8CEA80042C5E4 /* ImageReceiveCell.xib */; };
-		C9886DF41EA8CF020042C5E4 /* ImageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C9886DF31EA8CF020042C5E4 /* ImageTableViewCell.m */; };
+		C97E64081F3BDC4100BEA6BD /* trending.png in Resources */ = {isa = PBXBuildFile; fileRef = C97E64011F3BDC4100BEA6BD /* trending.png */; };
+		C97E64091F3BDC4100BEA6BD /* myChatsBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = C97E64021F3BDC4100BEA6BD /* myChatsBtn.png */; };
+		C97E640A1F3BDC4100BEA6BD /* findNewBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = C97E64031F3BDC4100BEA6BD /* findNewBtn.png */; };
+		C97E640B1F3BDC4100BEA6BD /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = C97E64041F3BDC4100BEA6BD /* background.png */; };
+		C97E640C1F3BDC4100BEA6BD /* Background copy 2.png in Resources */ = {isa = PBXBuildFile; fileRef = C97E64051F3BDC4100BEA6BD /* Background copy 2.png */; };
+		C97E640D1F3BDC4100BEA6BD /* addBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = C97E64061F3BDC4100BEA6BD /* addBtn.png */; };
+		C97E640E1F3BDC4100BEA6BD /* addBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = C97E64071F3BDC4100BEA6BD /* addBackground.png */; };
+		C97E64101F3BDC6700BEA6BD /* 20747871_1406543129423188_567774070_o.png in Resources */ = {isa = PBXBuildFile; fileRef = C97E640F1F3BDC6700BEA6BD /* 20747871_1406543129423188_567774070_o.png */; };
+		C9886DDB1E9BAFF90042C5E4 /* ContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = C9886DDA1E9BAFF90042C5E4 /* ContentView.m */; settings = {COMPILER_FLAGS = "-v"; }; };
+		C9886DE31E9BB0140042C5E4 /* ChatCellSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = C9886DE11E9BB0140042C5E4 /* ChatCellSettings.m */; settings = {COMPILER_FLAGS = "-v"; }; };
 		C9AAB3401E91243400E37128 /* Image in Resources */ = {isa = PBXBuildFile; fileRef = C9AAB33F1E91243400E37128 /* Image */; };
 		C9AAB3421E91265D00E37128 /* PhotosUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9AAB3411E91265D00E37128 /* PhotosUI.framework */; };
 		C9AAB3441E91266200E37128 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9AAB3431E91266200E37128 /* Photos.framework */; };
-		C9AAB3471E950D4500E37128 /* Text-MessageObject.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AAB3461E950D4500E37128 /* Text-MessageObject.m */; };
-		C9AAB34A1E9525EA00E37128 /* TestTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AAB3491E9525EA00E37128 /* TestTableViewController.m */; };
-		C9AEF4A41EB8606B001BEB07 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AEF4A31EB8606B001BEB07 /* ProfileViewController.m */; };
+		C9AAB3471E950D4500E37128 /* Text-MessageObject.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AAB3461E950D4500E37128 /* Text-MessageObject.m */; settings = {COMPILER_FLAGS = "-v"; }; };
+		C9AAB34A1E9525EA00E37128 /* TestTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AAB3491E9525EA00E37128 /* TestTableViewController.m */; settings = {COMPILER_FLAGS = "-v"; }; };
+		C9AEF4A41EB8606B001BEB07 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AEF4A31EB8606B001BEB07 /* ProfileViewController.m */; settings = {COMPILER_FLAGS = "-v"; }; };
 		C9AEF4A61EB8618C001BEB07 /* IMG_6168.JPG in Resources */ = {isa = PBXBuildFile; fileRef = C9AEF4A51EB8618C001BEB07 /* IMG_6168.JPG */; };
-		C9AEF4A91EB87AA0001BEB07 /* CreateChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AEF4A81EB87AA0001BEB07 /* CreateChatViewController.m */; };
-		C9AEF4AC1EB8B006001BEB07 /* ChatSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AEF4AB1EB8B006001BEB07 /* ChatSettingsViewController.m */; };
-		C9AEF4AF1EBAE70F001BEB07 /* RKCustomButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AEF4AE1EBAE70F001BEB07 /* RKCustomButton.m */; };
-		C9C5086A1E8BE35F00F611C0 /* CardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C9C508681E8BE35F00F611C0 /* CardCell.m */; };
-		C9C5086E1E8BE3AB00F611C0 /* AdCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C9C5086D1E8BE3AB00F611C0 /* AdCell.m */; };
+		C9AEF4A91EB87AA0001BEB07 /* CreateChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AEF4A81EB87AA0001BEB07 /* CreateChatViewController.m */; settings = {COMPILER_FLAGS = "-v"; }; };
+		C9AEF4AC1EB8B006001BEB07 /* ChatSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AEF4AB1EB8B006001BEB07 /* ChatSettingsViewController.m */; settings = {COMPILER_FLAGS = "-v"; }; };
+		C9AEF4AF1EBAE70F001BEB07 /* RKCustomButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AEF4AE1EBAE70F001BEB07 /* RKCustomButton.m */; settings = {COMPILER_FLAGS = "-v"; }; };
+		C9C5086A1E8BE35F00F611C0 /* CardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C9C508681E8BE35F00F611C0 /* CardCell.m */; settings = {COMPILER_FLAGS = "-v"; }; };
+		C9C5086E1E8BE3AB00F611C0 /* AdCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C9C5086D1E8BE3AB00F611C0 /* AdCell.m */; settings = {COMPILER_FLAGS = "-v"; }; };
+		C9D15F0C1F399F230006F82F /* ChatTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D15F0A1F399F230006F82F /* ChatTableViewCell.m */; settings = {COMPILER_FLAGS = "-v"; }; };
+		C9D15F0E1F399F340006F82F /* ImageReceiveCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9D15F0D1F399F340006F82F /* ImageReceiveCell.xib */; };
+		C9D15F111F399FC20006F82F /* ChatSendCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9D15F0F1F399FC20006F82F /* ChatSendCell.xib */; };
+		C9D15F121F399FC20006F82F /* ChatReceiveCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9D15F101F399FC20006F82F /* ChatReceiveCell.xib */; };
+		C9D15F151F399FF50006F82F /* ChatTableViewCellXIB.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D15F131F399FF50006F82F /* ChatTableViewCellXIB.m */; settings = {COMPILER_FLAGS = "-v"; }; };
+		C9D15F181F39A0550006F82F /* ImageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D15F171F39A0550006F82F /* ImageTableViewCell.m */; settings = {COMPILER_FLAGS = "-v"; }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -102,21 +109,20 @@
 		C92A22A21E88C84D0080C1D5 /* SRWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRWebSocket.h; sourceTree = "<group>"; };
 		C92A22A31E88C84D0080C1D5 /* SRWebSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRWebSocket.m; sourceTree = "<group>"; };
 		C92A22A81E88CB240080C1D5 /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
-		C9886DD91E9BAFF90042C5E4 /* ContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentView.h; sourceTree = "<group>"; };
-		C9886DDA1E9BAFF90042C5E4 /* ContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentView.m; sourceTree = "<group>"; };
-		C9886DDE1E9BB0140042C5E4 /* ChatTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatTableViewCell.h; sourceTree = "<group>"; };
-		C9886DDF1E9BB0140042C5E4 /* ChatTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatTableViewCell.m; sourceTree = "<group>"; };
-		C9886DE01E9BB0140042C5E4 /* ChatCellSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatCellSettings.h; sourceTree = "<group>"; };
-		C9886DE11E9BB0140042C5E4 /* ChatCellSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatCellSettings.m; sourceTree = "<group>"; };
-		C9886DE51EA8CCBC0042C5E4 /* Image-MessageObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Image-MessageObject.h"; path = "Models/Image-MessageObject.h"; sourceTree = "<group>"; };
-		C9886DE61EA8CCBC0042C5E4 /* Image-MessageObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Image-MessageObject.m"; path = "Models/Image-MessageObject.m"; sourceTree = "<group>"; };
-		C9886DE81EA8CDBA0042C5E4 /* ChatTableViewCellXIB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatTableViewCellXIB.h; sourceTree = "<group>"; };
-		C9886DE91EA8CDBA0042C5E4 /* ChatTableViewCellXIB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatTableViewCellXIB.m; sourceTree = "<group>"; };
-		C9886DEA1EA8CDBA0042C5E4 /* ChatSendCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatSendCell.xib; sourceTree = "<group>"; };
-		C9886DEB1EA8CDBA0042C5E4 /* ChatReceiveCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatReceiveCell.xib; sourceTree = "<group>"; };
-		C9886DF01EA8CEA80042C5E4 /* ImageReceiveCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ImageReceiveCell.xib; path = "../../../../Public/ChatX/ChatX-iOS/ChatX/ImageReceiveCell.xib"; sourceTree = "<group>"; };
-		C9886DF21EA8CF020042C5E4 /* ImageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageTableViewCell.h; sourceTree = "<group>"; };
-		C9886DF31EA8CF020042C5E4 /* ImageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageTableViewCell.m; sourceTree = "<group>"; };
+		C97E64011F3BDC4100BEA6BD /* trending.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trending.png; sourceTree = "<group>"; };
+		C97E64021F3BDC4100BEA6BD /* myChatsBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = myChatsBtn.png; sourceTree = "<group>"; };
+		C97E64031F3BDC4100BEA6BD /* findNewBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = findNewBtn.png; sourceTree = "<group>"; };
+		C97E64041F3BDC4100BEA6BD /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
+		C97E64051F3BDC4100BEA6BD /* Background copy 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Background copy 2.png"; sourceTree = "<group>"; };
+		C97E64061F3BDC4100BEA6BD /* addBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addBtn.png; sourceTree = "<group>"; };
+		C97E64071F3BDC4100BEA6BD /* addBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addBackground.png; sourceTree = "<group>"; };
+		C97E640F1F3BDC6700BEA6BD /* 20747871_1406543129423188_567774070_o.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 20747871_1406543129423188_567774070_o.png; sourceTree = "<group>"; };
+		C9886DD91E9BAFF90042C5E4 /* ContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContentView.h; path = ChatX/ContentView.h; sourceTree = SOURCE_ROOT; };
+		C9886DDA1E9BAFF90042C5E4 /* ContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContentView.m; path = ChatX/ContentView.m; sourceTree = SOURCE_ROOT; };
+		C9886DDE1E9BB0140042C5E4 /* ChatTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChatTableViewCell.h; path = ChatX/ChatTableViewCell.h; sourceTree = SOURCE_ROOT; };
+		C9886DDF1E9BB0140042C5E4 /* ChatTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChatTableViewCell.m; path = ChatX/ChatTableViewCell.m; sourceTree = SOURCE_ROOT; };
+		C9886DE01E9BB0140042C5E4 /* ChatCellSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChatCellSettings.h; path = ChatX/ChatCellSettings.h; sourceTree = SOURCE_ROOT; };
+		C9886DE11E9BB0140042C5E4 /* ChatCellSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChatCellSettings.m; path = ChatX/ChatCellSettings.m; sourceTree = SOURCE_ROOT; };
 		C9AAB33F1E91243400E37128 /* Image */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Image; sourceTree = "<group>"; };
 		C9AAB3411E91265D00E37128 /* PhotosUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PhotosUI.framework; path = System/Library/Frameworks/PhotosUI.framework; sourceTree = SDKROOT; };
 		C9AAB3431E91266200E37128 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
@@ -138,6 +144,15 @@
 		C9C508691E8BE35F00F611C0 /* CardCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardCell.h; sourceTree = "<group>"; };
 		C9C5086C1E8BE3AB00F611C0 /* AdCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdCell.h; sourceTree = "<group>"; };
 		C9C5086D1E8BE3AB00F611C0 /* AdCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdCell.m; sourceTree = "<group>"; };
+		C9D15F0A1F399F230006F82F /* ChatTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChatTableViewCell.m; path = ChatX/ChatTableViewCell.m; sourceTree = SOURCE_ROOT; };
+		C9D15F0B1F399F230006F82F /* ChatTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChatTableViewCell.h; path = ChatX/ChatTableViewCell.h; sourceTree = SOURCE_ROOT; };
+		C9D15F0D1F399F340006F82F /* ImageReceiveCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ImageReceiveCell.xib; path = ChatX/ImageReceiveCell.xib; sourceTree = SOURCE_ROOT; };
+		C9D15F0F1F399FC20006F82F /* ChatSendCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ChatSendCell.xib; path = ChatX/ChatSendCell.xib; sourceTree = SOURCE_ROOT; };
+		C9D15F101F399FC20006F82F /* ChatReceiveCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ChatReceiveCell.xib; path = ChatX/ChatReceiveCell.xib; sourceTree = SOURCE_ROOT; };
+		C9D15F131F399FF50006F82F /* ChatTableViewCellXIB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChatTableViewCellXIB.m; path = ChatX/ChatTableViewCellXIB.m; sourceTree = SOURCE_ROOT; };
+		C9D15F141F399FF50006F82F /* ChatTableViewCellXIB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChatTableViewCellXIB.h; path = ChatX/ChatTableViewCellXIB.h; sourceTree = SOURCE_ROOT; };
+		C9D15F161F39A0550006F82F /* ImageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageTableViewCell.h; path = ChatX/ImageTableViewCell.h; sourceTree = SOURCE_ROOT; };
+		C9D15F171F39A0550006F82F /* ImageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageTableViewCell.m; path = ChatX/ImageTableViewCell.m; sourceTree = SOURCE_ROOT; };
 		DEEC1907138EDE16A4FCB197 /* libPods-ChatX.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ChatX.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -250,6 +265,7 @@
 		C92A226B1E867B0D0080C1D5 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				C97E63FF1F3BDC2700BEA6BD /* Images */,
 				C9187ABB1EBC3E57009B23A8 /* Menu.h */,
 				C9187ABC1EBC3E57009B23A8 /* Menu.m */,
 				C9AEF4AD1EBAE70F001BEB07 /* RKCustomButton.h */,
@@ -294,6 +310,29 @@
 			path = ChatX;
 			sourceTree = "<group>";
 		};
+		C97E63FF1F3BDC2700BEA6BD /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				C97E64001F3BDC3200BEA6BD /* UI */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
+		C97E64001F3BDC3200BEA6BD /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				C97E640F1F3BDC6700BEA6BD /* 20747871_1406543129423188_567774070_o.png */,
+				C97E64011F3BDC4100BEA6BD /* trending.png */,
+				C97E64021F3BDC4100BEA6BD /* myChatsBtn.png */,
+				C97E64031F3BDC4100BEA6BD /* findNewBtn.png */,
+				C97E64041F3BDC4100BEA6BD /* background.png */,
+				C97E64051F3BDC4100BEA6BD /* Background copy 2.png */,
+				C97E64061F3BDC4100BEA6BD /* addBtn.png */,
+				C97E64071F3BDC4100BEA6BD /* addBackground.png */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
 		C9886DDC1E9BAFFE0042C5E4 /* ChatTable */ = {
 			isa = PBXGroup;
 			children = (
@@ -327,13 +366,15 @@
 		C9886DEC1EA8CDBA0042C5E4 /* iMessageBubble using XIB */ = {
 			isa = PBXGroup;
 			children = (
-				C9886DE81EA8CDBA0042C5E4 /* ChatTableViewCellXIB.h */,
-				C9886DE91EA8CDBA0042C5E4 /* ChatTableViewCellXIB.m */,
-				C9886DEA1EA8CDBA0042C5E4 /* ChatSendCell.xib */,
-				C9886DEB1EA8CDBA0042C5E4 /* ChatReceiveCell.xib */,
-				C9886DF21EA8CF020042C5E4 /* ImageTableViewCell.h */,
-				C9886DF31EA8CF020042C5E4 /* ImageTableViewCell.m */,
-				C9886DF01EA8CEA80042C5E4 /* ImageReceiveCell.xib */,
+				C9D15F131F399FF50006F82F /* ChatTableViewCellXIB.m */,
+				C9D15F141F399FF50006F82F /* ChatTableViewCellXIB.h */,
+				C9D15F0F1F399FC20006F82F /* ChatSendCell.xib */,
+				C9D15F101F399FC20006F82F /* ChatReceiveCell.xib */,
+				C9D15F161F39A0550006F82F /* ImageTableViewCell.h */,
+				C9D15F171F39A0550006F82F /* ImageTableViewCell.m */,
+				C9D15F0D1F399F340006F82F /* ImageReceiveCell.xib */,
+				C9D15F0A1F399F230006F82F /* ChatTableViewCell.m */,
+				C9D15F0B1F399F230006F82F /* ChatTableViewCell.h */,
 			);
 			name = "iMessageBubble using XIB";
 			path = "../../../../Downloads/iMessageBubble-master/Sample Project/iMessageBubble";
@@ -348,8 +389,6 @@
 				C9C5086D1E8BE3AB00F611C0 /* AdCell.m */,
 				C9AAB3451E950D4500E37128 /* Text-MessageObject.h */,
 				C9AAB3461E950D4500E37128 /* Text-MessageObject.m */,
-				C9886DE51EA8CCBC0042C5E4 /* Image-MessageObject.h */,
-				C9886DE61EA8CCBC0042C5E4 /* Image-MessageObject.m */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -394,6 +433,9 @@
 							com.apple.Keychain = {
 								enabled = 1;
 							};
+							com.apple.Push = {
+								enabled = 0;
+							};
 						};
 					};
 				};
@@ -425,14 +467,22 @@
 			files = (
 				C9AAB3401E91243400E37128 /* Image in Resources */,
 				C92A227B1E867B0D0080C1D5 /* LaunchScreen.storyboard in Resources */,
-				C9886DF11EA8CEA80042C5E4 /* ImageReceiveCell.xib in Resources */,
+				C9D15F111F399FC20006F82F /* ChatSendCell.xib in Resources */,
+				C97E640C1F3BDC4100BEA6BD /* Background copy 2.png in Resources */,
+				C9D15F121F399FC20006F82F /* ChatReceiveCell.xib in Resources */,
+				C97E64081F3BDC4100BEA6BD /* trending.png in Resources */,
 				C92A22881E87F79C0080C1D5 /* empire.jpg in Resources */,
-				C9886DEE1EA8CDBA0042C5E4 /* ChatSendCell.xib in Resources */,
+				C97E64091F3BDC4100BEA6BD /* myChatsBtn.png in Resources */,
+				C97E64101F3BDC6700BEA6BD /* 20747871_1406543129423188_567774070_o.png in Resources */,
 				C92A22831E867CD10080C1D5 /* GoogleService-Info.plist in Resources */,
 				C9AEF4A61EB8618C001BEB07 /* IMG_6168.JPG in Resources */,
+				C97E640E1F3BDC4100BEA6BD /* addBackground.png in Resources */,
+				C97E640D1F3BDC4100BEA6BD /* addBtn.png in Resources */,
+				C97E640B1F3BDC4100BEA6BD /* background.png in Resources */,
 				C92A22781E867B0D0080C1D5 /* Assets.xcassets in Resources */,
 				C92A22761E867B0D0080C1D5 /* Main.storyboard in Resources */,
-				C9886DEF1EA8CDBA0042C5E4 /* ChatReceiveCell.xib in Resources */,
+				C97E640A1F3BDC4100BEA6BD /* findNewBtn.png in Resources */,
+				C9D15F0E1F399F340006F82F /* ImageReceiveCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -499,28 +549,27 @@
 				C9AEF4A91EB87AA0001BEB07 /* CreateChatViewController.m in Sources */,
 				C9AAB34A1E9525EA00E37128 /* TestTableViewController.m in Sources */,
 				C92A22981E88C8340080C1D5 /* SocketIOTransportWebsocket.m in Sources */,
-				C9886DED1EA8CDBA0042C5E4 /* ChatTableViewCellXIB.m in Sources */,
 				C92A22861E87F7550080C1D5 /* NearMeViewController.m in Sources */,
 				C9187AC81EBC3F3A009B23A8 /* KYDrawerController.m in Sources */,
 				C92A22731E867B0D0080C1D5 /* ViewController.m in Sources */,
 				C9AEF4A41EB8606B001BEB07 /* ProfileViewController.m in Sources */,
 				C92A229B1E88C8340080C1D5 /* SocketIO.m in Sources */,
 				C9C5086E1E8BE3AB00F611C0 /* AdCell.m in Sources */,
-				C9886DE21E9BB0140042C5E4 /* ChatTableViewCell.m in Sources */,
-				C9AEF4AC1EB8B006001BEB07 /* ChatSettingsViewController.m in Sources */,
-				C9886DE71EA8CCBC0042C5E4 /* Image-MessageObject.m in Sources */,
 				C9187AC91EBC3F3A009B23A8 /* KYEmbedDrawerControllerSegue.m in Sources */,
+				C9AEF4AC1EB8B006001BEB07 /* ChatSettingsViewController.m in Sources */,
+				C9D15F0C1F399F230006F82F /* ChatTableViewCell.m in Sources */,
+				C9886DE31E9BB0140042C5E4 /* ChatCellSettings.m in Sources */,
+				C9D15F151F399FF50006F82F /* ChatTableViewCellXIB.m in Sources */,
 				C9AEF4AF1EBAE70F001BEB07 /* RKCustomButton.m in Sources */,
 				C92A22991E88C8340080C1D5 /* SocketIOPacket.m in Sources */,
 				C9187AC01EBC3F1D009B23A8 /* Menu.m in Sources */,
+				C9D15F181F39A0550006F82F /* ImageTableViewCell.m in Sources */,
 				C92A22701E867B0D0080C1D5 /* AppDelegate.m in Sources */,
 				C92A226D1E867B0D0080C1D5 /* main.m in Sources */,
 				C92A22971E88C8340080C1D5 /* SocketIOTransportXHR.m in Sources */,
 				C9187ACA1EBC3F3A009B23A8 /* KYEmbedMainControllerSegue.m in Sources */,
-				C9886DF41EA8CF020042C5E4 /* ImageTableViewCell.m in Sources */,
 				C9AAB3471E950D4500E37128 /* Text-MessageObject.m in Sources */,
 				C92A22A61E88C84D0080C1D5 /* SRWebSocket.m in Sources */,
-				C9886DE31E9BB0140042C5E4 /* ChatCellSettings.m in Sources */,
 				C92A229A1E88C8340080C1D5 /* SocketIOJSONSerialization.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
