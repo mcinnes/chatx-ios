@@ -7,17 +7,8 @@
 // this file needs to be re-written as it is more of a POC than a finalised product
 
 #import "SocketViewController.h"
-#import "SocketIOPacket.h"
-#import "IODProfanityFilter.h"
-#import <ISMessages/ISMessages.h>
-#import <Parse/Parse.h>
-#import "Text-MessageObject.h"
-#import "ContentView.h"
-#import "ChatTableViewCellXIB.h"
-#import "ChatCellSettings.h"
-#import "ImageTableViewCell.h"
-#import "ChatSettingsViewController.h"
-#import "ImageQueryObject.h"
+#import "TGRImageZoomAnimationController.h"
+
 
 @interface SocketViewController ()
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *sendBarButton;
@@ -38,7 +29,6 @@
 @property (strong,nonatomic) ImageTableViewCell *imageCell;
 
 
-
 @property (strong,nonatomic) ContentView *handler;
 
 @end
@@ -49,19 +39,24 @@
     ChatCellSettings *chatCellSettings;
     ImageQueryObject *imageQuery;
     
+    UIView *toolbar;
+    UITextView *messageText;
+    UIButton *postComment;
 }
 
 
 - (void)viewDidLoad {
+   
     [super viewDidLoad];
     //self.yPositionStore = _tb.frame.origin.y;
 
-    UIButton* infoButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
-    UIBarButtonItem *modalButton = [[UIBarButtonItem alloc] initWithCustomView:infoButton];
-    [modalButton setTarget:self];
-    [modalButton setAction:@selector(showSettings:)];
+    UIButton* infoButton = [UIButton buttonWithType: UIButtonTypeInfoLight];
+    [infoButton addTarget:self action:@selector(showSettings:) forControlEvents:UIControlEventTouchDown];
     
-    [self.navigationItem setRightBarButtonItem:modalButton animated:YES];
+    UIBarButtonItem* itemAboutUs =[[UIBarButtonItem alloc]initWithCustomView:infoButton];
+
+
+    [self.navigationItem setRightBarButtonItem:itemAboutUs animated:YES];
 
     [_messageText setPlaceholder:@"Message..."];
     
@@ -101,19 +96,45 @@
 
     
     //Tap gesture on table view so that when someone taps on it, the keyboard is hidden
-    UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
+    //UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
     
-    [self.tableView addGestureRecognizer:gestureRecognizer];
+    //[self.tableView addGestureRecognizer:gestureRecognizer];
     
     [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+
+   
+    toolbar = [[UIView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height-50, self.view.frame.size.width, 50)];
+    
+    [toolbar setBackgroundColor:[UIColor whiteColor]];
+    
+    messageText = [[UITextView alloc]initWithFrame:CGRectMake(8, 8, self.view.frame.size.width - 16 - 75, 34)];
+    [messageText setBackgroundColor:[UIColor colorWithWhite:0.97 alpha:1]];
+    messageText.layer.cornerRadius = 5;
+    [messageText setFont:[UIFont fontWithName:@"Avenir Next" size:20]];
+    [messageText setTextColor:[UIColor colorWithWhite:0.35 alpha:1]];
+    [messageText setDelegate:self];
+    
+    postComment = [[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width-75, 0, 75, 50)];
+    [postComment setTitle:@"Post" forState:UIControlStateNormal];
+    [postComment.titleLabel setFont:[UIFont fontWithName:@"Avenir Next" size:20]];
+    [postComment setTitleColor:[UIColor colorWithRed:(255/255.0) green:(40/255.0) blue:(80/255.0) alpha:1.0] forState:UIControlStateNormal];
+    [postComment addTarget:self action:(s) forControlEvents:<#(UIControlEvents)#>]
+    [toolbar addSubview:messageText];
+    [toolbar addSubview:postComment];
+    
+    [[[UIApplication sharedApplication]delegate].window addSubview:toolbar];
+
+
 
     
 }
 - (void) dismissKeyboard
 {
-    [self.messageText resignFirstResponder];
+    //[self.messageText resignFirstResponder];
 }
-
+- (void)textViewDidBeginEditing:(UITextView *)textView{
+    //[self edb:self];
+}
 -(void)downloadPreviousMessages{
     
     PFQuery *query1 = [PFQuery queryWithClassName:_roomNumber];
@@ -193,7 +214,7 @@
 }
 
 -(void) updateTableView:(Text_MessageObject *)msg {
-    [self.messageText setText:@""];
+    [messageText setText:@""];
     //[self.handler textViewDidChange:self.messageText];
     
     [self.tableView beginUpdates];
@@ -230,6 +251,7 @@
         [dict setObject:[[PFUser currentUser] objectId] forKey:@"userId"];
         [dict setObject:_roomNumber forKey:@"roomNumber"];
         [dict setObject:@"text" forKey:@"type"];
+
 
 
         //send event is like emit
@@ -446,23 +468,15 @@
     //self.messageText.inputAccessoryView = _tb;
 
 }
-- (void)keyboardWasShown:(NSNotification*)aNotification
-{
-    NSDictionary* info = [aNotification userInfo];
-    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-    CGRect newFrame = _tb.frame;
-    newFrame.origin.y = [UIScreen mainScreen].bounds.size.height - kbSize.height - newFrame.size.height;
-    _tb.frame = newFrame;
+- (IBAction)edb:(id)sender {
+    self.messageText.inputAccessoryView = toolbar;
+    toolbar = [[UIView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height-321, self.view.frame.size.width, 50)];
+
+    [[[UIApplication sharedApplication]delegate].window addSubview:toolbar];
+    
     
 }
 
-- (void)keyboardWillBeHidden:(NSNotification*)aNotification
-{
-    CGRect newFrame = _tb.frame;
-    //newFrame.origin.y = self.yPositionStore;
-   // self.toolBar.frame = newFrame;
-    
-}
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
@@ -509,7 +523,7 @@
 
         _imageCell = (ImageTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"imageReceive"];
         
-        _imageCell.selectionStyle = UITableViewCellSelectionStyleNone;
+        //_imageCell.selectionStyle = UITableViewCellSelectionStyleNone;
 
         
         _imageCell.messageImage.image = message.image;
@@ -528,7 +542,7 @@
         _chatCell.chatMessageLabel.text = message.message;
         
         _chatCell.chatNameLabel.text = message.nickname;
-        _chatCell.selectionStyle = UITableViewCellSelectionStyleNone;
+        //_chatCell.selectionStyle = UITableViewCellSelectionStyleNone;
 
         //_chatCell.chatTimeLabel.text = message.userTime;
         //_chatCell.chatBackground.backgroundColor = [UIColor redColor];
@@ -579,9 +593,16 @@
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     
     if ([cell isKindOfClass:[ImageTableViewCell class]]) {
+        NSLog(@"Image hopefully %@", cell.class);
+        Text_MessageObject *obj = _conversationObjects[indexPath.row];
         
-    }else if([cell isKindOfClass:[ChatTableViewCellXIB class]]){
+        [self showImageViewerwithImage:obj.image];
+        [tableView deselectRowAtIndexPath:indexPath animated:NO];
         
+    }else{
+        
+        [tableView deselectRowAtIndexPath:indexPath animated:NO];
+
     }
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -643,9 +664,23 @@
 }
 
 -(IBAction)showSettings:(id)sender{
-    NSLog(@"Modal");
+    //NSLog(@"Modal");
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Chat Room Settings"
+                                                                   message:nil
+                                                            preferredStyle:UIAlertControllerStyleActionSheet]; // 1
+    UIAlertAction *firstAction = [UIAlertAction actionWithTitle:@"Subscribe"
+                                                          style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+                                                              bool update = [imageQuery subscribeToChatwithID:_roomNumber];
+                                                          }]; // 2
+    UIAlertAction *secondAction = [UIAlertAction actionWithTitle:@"Settings"
+                                                           style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+                                                               [self performSegueWithIdentifier:@"settings" sender:self];
+                                                           }]; // 3
     
-    [self performSegueWithIdentifier:@"settings" sender:self];
+    [alert addAction:firstAction]; // 4
+    [alert addAction:secondAction]; // 5
+    
+    [self presentViewController:alert animated:YES completion:nil]; // 6
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
@@ -666,5 +701,26 @@
     }
 }
 
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
+    if ([presented isKindOfClass:TGRImageViewController.class]) {
+        return [[TGRImageZoomAnimationController alloc] init];
+    }
+    return nil;
+}
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
+    if ([dismissed isKindOfClass:TGRImageViewController.class]) {
+        return [[TGRImageZoomAnimationController alloc] init];
+    }
+    return nil;
+}
+
+- (void)showImageViewerwithImage:(UIImage *)selectedImage{
+    TGRImageViewController *viewController = [[TGRImageViewController alloc] initWithImage:selectedImage];
+    // Don't forget to set ourselves as the transition delegate
+    viewController.transitioningDelegate = self;
+    
+    [self presentViewController:viewController animated:YES completion:nil];
+}
 
 @end

@@ -42,6 +42,7 @@
 		C97E64101F3BDC6700BEA6BD /* 20747871_1406543129423188_567774070_o.png in Resources */ = {isa = PBXBuildFile; fileRef = C97E640F1F3BDC6700BEA6BD /* 20747871_1406543129423188_567774070_o.png */; };
 		C9886DDB1E9BAFF90042C5E4 /* ContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = C9886DDA1E9BAFF90042C5E4 /* ContentView.m */; settings = {COMPILER_FLAGS = "-v"; }; };
 		C9886DE31E9BB0140042C5E4 /* ChatCellSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = C9886DE11E9BB0140042C5E4 /* ChatCellSettings.m */; settings = {COMPILER_FLAGS = "-v"; }; };
+		C9A084D31F4C48C200786353 /* SubscribedChatsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9A084D21F4C48C200786353 /* SubscribedChatsTableViewController.m */; };
 		C9AAB3401E91243400E37128 /* Image in Resources */ = {isa = PBXBuildFile; fileRef = C9AAB33F1E91243400E37128 /* Image */; };
 		C9AAB3421E91265D00E37128 /* PhotosUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9AAB3411E91265D00E37128 /* PhotosUI.framework */; };
 		C9AAB3441E91266200E37128 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9AAB3431E91266200E37128 /* Photos.framework */; };
@@ -126,6 +127,8 @@
 		C9886DDF1E9BB0140042C5E4 /* ChatTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChatTableViewCell.m; path = ChatX/ChatTableViewCell.m; sourceTree = SOURCE_ROOT; };
 		C9886DE01E9BB0140042C5E4 /* ChatCellSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChatCellSettings.h; path = ChatX/ChatCellSettings.h; sourceTree = SOURCE_ROOT; };
 		C9886DE11E9BB0140042C5E4 /* ChatCellSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChatCellSettings.m; path = ChatX/ChatCellSettings.m; sourceTree = SOURCE_ROOT; };
+		C9A084D11F4C48C100786353 /* SubscribedChatsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SubscribedChatsTableViewController.h; path = VC/SubscribedChatsTableViewController.h; sourceTree = "<group>"; };
+		C9A084D21F4C48C200786353 /* SubscribedChatsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SubscribedChatsTableViewController.m; path = VC/SubscribedChatsTableViewController.m; sourceTree = "<group>"; };
 		C9AAB33F1E91243400E37128 /* Image */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Image; sourceTree = "<group>"; };
 		C9AAB3411E91265D00E37128 /* PhotosUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PhotosUI.framework; path = System/Library/Frameworks/PhotosUI.framework; sourceTree = SDKROOT; };
 		C9AAB3431E91266200E37128 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
@@ -244,6 +247,8 @@
 				C9AEF4AB1EB8B006001BEB07 /* ChatSettingsViewController.m */,
 				C92A22891E88C7450080C1D5 /* SocketViewController.h */,
 				C92A228A1E88C7450080C1D5 /* SocketViewController.m */,
+				C9A084D11F4C48C100786353 /* SubscribedChatsTableViewController.h */,
+				C9A084D21F4C48C200786353 /* SubscribedChatsTableViewController.m */,
 				C95ECBC01F4BD1CE00B44F25 /* ImageQueryObject.h */,
 				C95ECBC11F4BD1CE00B44F25 /* ImageQueryObject.m */,
 				C9AEF4A21EB8606B001BEB07 /* ProfileViewController.h */,
@@ -561,6 +566,7 @@
 				C92A229B1E88C8340080C1D5 /* SocketIO.m in Sources */,
 				C95ECBC21F4BD1CE00B44F25 /* ImageQueryObject.m in Sources */,
 				C9C5086E1E8BE3AB00F611C0 /* AdCell.m in Sources */,
+				C9A084D31F4C48C200786353 /* SubscribedChatsTableViewController.m in Sources */,
 				C9187AC91EBC3F3A009B23A8 /* KYEmbedDrawerControllerSegue.m in Sources */,
 				C9AEF4AC1EB8B006001BEB07 /* ChatSettingsViewController.m in Sources */,
 				C9D15F0C1F399F230006F82F /* ChatTableViewCell.m in Sources */,

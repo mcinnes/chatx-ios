@@ -33,5 +33,20 @@
     }];;
     return returnImage;
 }
-
+-(bool)subscribeToChatwithID:(NSString *)chatID{
+    
+    NSString *currentSubscriptions = [PFUser currentUser][@"subscribedChats"];
+    NSString *appendString = [NSString stringWithFormat:@"%@,%@",currentSubscriptions, chatID];
+    __block bool status;
+    [PFUser currentUser][@"subscribedChats"] = appendString;
+    
+    [[PFUser currentUser]saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if (!error) {
+            status = true;
+        } else {
+            status = false;
+        }
+    }];
+    return status;
+}
 @end

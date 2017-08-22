@@ -11,5 +11,6 @@
 @interface ImageQueryObject : NSObject
 
 -(UIImage *)downloadSingleImagewithID:(NSString *)imageID;
+-(bool)subscribeToChatwithID:(NSString *)chatID;
 
 @end

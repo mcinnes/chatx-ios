@@ -31,6 +31,7 @@
         
         [self presentViewController:logInController animated:true completion:nil];
     }
+    NSLog(@"SessionKey %@", [[PFUser currentUser]sessionToken]);
    
 //
     //[PFUser logOut];
