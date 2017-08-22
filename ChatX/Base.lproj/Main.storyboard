@@ -310,6 +310,7 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
                                             <connections>
+                                                <action selector="messageTextChanged:" destination="hde-aU-w8v" eventType="valueChanged" id="ris-iy-aBh"/>
                                                 <action selector="removeFromSuper:" destination="hde-aU-w8v" eventType="touchUpInside" id="R73-6F-bR2"/>
                                             </connections>
                                         </textField>
@@ -377,6 +378,7 @@
                     <toolbarItems/>
                     <connections>
                         <outlet property="messageText" destination="j2C-vf-adb" id="0v4-jI-0w2"/>
+                        <outlet property="sendBarButton" destination="Sjf-hY-PEO" id="4fj-JM-7zV"/>
                         <outlet property="tableView" destination="HZm-kd-Zg8" id="rbI-W2-tLC"/>
                         <outlet property="tb" destination="TvE-sU-XXw" id="9ub-Ia-7tp"/>
                         <segue destination="jcq-p8-lEi" kind="presentation" identifier="settings" modalTransitionStyle="coverVertical" id="ksf-dZ-TuB"/>

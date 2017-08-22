@@ -28,6 +28,15 @@
     
      //elDrawer.mainViewController=navController;
     [elDrawer setDrawerState:KYDrawerControllerDrawerStateClosed animated:YES];
+    
+    switch (newIndexPath.row) {
+        case 7:
+            [PFUser logOut];
+            break;
+            
+        default:
+            break;
+    }
 }
 
 //- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

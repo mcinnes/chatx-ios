@@ -15,11 +15,12 @@
 #import "ContentView.h"
 #import "ChatTableViewCellXIB.h"
 #import "ChatCellSettings.h"
-//#import "Image-MessageObject.h"
 #import "ImageTableViewCell.h"
 #import "ChatSettingsViewController.h"
+#import "ImageQueryObject.h"
 
 @interface SocketViewController ()
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *sendBarButton;
 @property (weak, nonatomic) IBOutlet UITextField *nameTextBox;
 @property (weak, nonatomic) IBOutlet UITextView *textView;
 @property (weak, nonatomic) IBOutlet UIImageView *testImageView;
@@ -36,7 +37,6 @@
 @property (strong,nonatomic) ChatTableViewCellXIB *chatCell;
 @property (strong,nonatomic) ImageTableViewCell *imageCell;
 
-//@property (strong,nonatomic) ChatTableViewCellXIB *chatCell;
 
 
 @property (strong,nonatomic) ContentView *handler;
@@ -47,8 +47,10 @@
     BOOL photoMessage;
     NSData *imageData;
     ChatCellSettings *chatCellSettings;
+    ImageQueryObject *imageQuery;
     
 }
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -61,15 +63,17 @@
     
     [self.navigationItem setRightBarButtonItem:modalButton animated:YES];
 
+    [_messageText setPlaceholder:@"Message..."];
+    
     _conversationObjects = [NSMutableArray new];
-    // Do any additional setup after loading the view.
     
     // create socket.io client instance
     socketIO = [[SocketIO alloc] initWithDelegate:self];
     
     // connect to the socket.io server that is running locally at port 3000
-    [socketIO connectToHost:@"59.191.208.17" onPort:3000];
+    [socketIO connectToHost:@"127.0.0.1" onPort:3000];
     
+    imageQuery = [ImageQueryObject new];
     [self downloadPreviousMessages];
     
     chatCellSettings = [ChatCellSettings getInstance];
@@ -100,6 +104,7 @@
     UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
     
     [self.tableView addGestureRecognizer:gestureRecognizer];
+    
     [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 
     
@@ -120,8 +125,19 @@
         for (PFObject *object in [messages reverseObjectEnumerator]) {
             //_textView.text = [_textView.text stringByAppendingString:[NSString stringWithFormat:@"%@: %@\n\n", object[@"nickname"], object[@"msg"]]];
             
-            Text_MessageObject *messageObj = [[Text_MessageObject alloc]initMessageWithName:object[@"nickname"] message:object[@"msg"] time:nil type:@"text" userId:object[@"userId"] image:NULL];
-            [self updateTableView:messageObj];
+            
+            
+            if ([object[@"type"] isEqualToString:@"image"]){
+                
+                Text_MessageObject *messageObj = [[Text_MessageObject alloc]initMessageWithName:object[@"nickname"] message:nil time:nil type:object[@"type"] userId:object[@"userId"] image:[imageQuery downloadSingleImagewithID:object[@"image"]]];
+                [self updateTableView:messageObj];
+
+                
+            } else {
+                Text_MessageObject *messageObj = [[Text_MessageObject alloc]initMessageWithName:object[@"nickname"] message:object[@"msg"] time:nil type:object[@"type"] userId:object[@"userId"] image:nil];
+                [self updateTableView:messageObj];
+
+            }
             
         }
         
@@ -213,6 +229,8 @@
         [dict setObject:[PFUser currentUser][@"nickname"] forKey:@"nickname"];
         [dict setObject:[[PFUser currentUser] objectId] forKey:@"userId"];
         [dict setObject:_roomNumber forKey:@"roomNumber"];
+        [dict setObject:@"text" forKey:@"type"];
+
 
         //send event is like emit
         [socketIO sendEvent:@"send" withData:dict];
@@ -244,6 +262,9 @@
                     [dict setObject:[[PFUser currentUser]objectId] forKey:@"name"];
                     [dict setObject:[newPhotoObject objectId] forKey:@"image"];
                     [dict setObject:[PFUser currentUser][@"nickname"] forKey:@"nickname"];
+                    [dict setObject:[[PFUser currentUser] objectId] forKey:@"userId"];
+                    [dict setObject:_roomNumber forKey:@"roomNumber"];
+                    [dict setObject:@"image" forKey:@"type"];
 
                     //send event is like emit
                     [socketIO sendEvent:@"image" withData:dict];
@@ -255,17 +276,13 @@
             }];
         }
     }progressBlock:^(int percentDone) {
-        UIView *paintView=[[UIView alloc]initWithFrame:CGRectMake(0, self.navigationController.navigationBar.frame.size.height, self.view.frame.size.width, 50)];
-        [paintView setBackgroundColor:[UIColor yellowColor]];
-        UIProgressView *progressView = [[UIProgressView alloc] init];
-        progressView.frame = CGRectMake(0,0,self.view.frame.size.width,30);
-        [paintView addSubview:progressView];
+    
         
-        [self.view addSubview:paintView];
-        progressView.progress = (float)percentDone;
         NSLog(@"%d", percentDone);
+        [self.messageText setPlaceholder:[NSString stringWithFormat:@"Sending %d%%",percentDone]];
     }];
-
+    self.messageText.placeholder = @"Message...";
+    self.sendBarButton.title = @"Send";
     
 }
 
@@ -345,7 +362,7 @@
     }
     else if ([packet.name isEqualToString:@"advertisment"]){
         
-        NSString *adString = [IODProfanityFilter stringByFilteringString:[NSString stringWithFormat:@"Advertisment:\n %@\n\n", tempDict[@"msg"]]];
+        NSString *adString = [IODProfanityFilter stringByFilteringString:[NSString stringWithFormat:@"Advertisment:\n %@", tempDict[@"msg"]]];
         
         Text_MessageObject *messageObj = [[Text_MessageObject alloc]initMessageWithName:tempDict[@"source"] message:adString time:nil type:@"advertisment" userId:tempDict[@"userId"] image:NULL];
 
@@ -446,13 +463,21 @@
    // self.toolBar.frame = newFrame;
     
 }
+
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
+    //
     UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
     imageData = UIImagePNGRepresentation(chosenImage);
+    
+    //Placeholders
+    self.messageText.placeholder = @"Image Selected";
+    self.sendBarButton.title = @"Upload";
+    
+    //We are uploading a photo
     photoMessage = true;
     
-    //NSLog(@"%@", _selectedImage);
+    //Dismiss Picker
     [picker dismissViewControllerAnimated:YES completion:NULL];
     
 }
@@ -460,9 +485,6 @@
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     [picker dismissViewControllerAnimated:YES completion:NULL];
     
-}
-- (NSString *)encodeToBase64String:(UIImage *)image {
-    return [UIImagePNGRepresentation(image) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
 }
 
 #pragma mark - UITableViewDatasource methods
@@ -515,10 +537,24 @@
         return _chatCell;
 
     }
+    else if ([message.messageType isEqualToString:@"advertisment"])
+    {
+        _chatCell = (ChatTableViewCellXIB *)[tableView dequeueReusableCellWithIdentifier:@"chatReceive"];
+        
+        _chatCell.chatMessageLabel.text = message.message;
+        
+        _chatCell.chatNameLabel.text = message.nickname;
+        
+        _chatCell.chatTimeLabel.text = message.time;
+        
+        _chatCell.chatUserImage.image = [UIImage imageNamed:@"defaultUser"];
+        
+        _chatCell.chatBackgroundView.backgroundColor = [UIColor colorWithRed:0.96 green:0.68 blue:0.06 alpha:1.0];
+        
+        return _chatCell;
+    }
     else
     {
-        /*Uncomment second line and comment first to use XIB instead of code*/
-        //_chatCell = (ChatTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"chatReceive"];
         
         _chatCell = (ChatTableViewCellXIB *)[tableView dequeueReusableCellWithIdentifier:@"chatReceive"];
         
@@ -530,19 +566,24 @@
         
         _chatCell.chatUserImage.image = [UIImage imageNamed:@"defaultUser"];
         
-        if ([message.messageType isEqualToString:@"advertisment"]) {
-#warning To Fix Background
-            //_chatCell.chatBackground.backgroundColor = [UIColor redColor];
-        }
+       
         return _chatCell;
 
-        /*Comment this line is you are using XIB*/
-        //_chatCell.authorType = iMessageBubbleTableViewCellAuthorTypeReceiver;
     }
     
     
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath;{
+    
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    
+    if ([cell isKindOfClass:[ImageTableViewCell class]]) {
+        
+    }else if([cell isKindOfClass:[ChatTableViewCellXIB class]]){
+        
+    }
+}
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
@@ -581,7 +622,11 @@
                                                     context:nil].size;
         
 
-    } else {
+    } else if (message.image){
+        Messagesize.height = 132.0;
+    }
+        
+    else {
         Messagesize = CGSizeMake(48, 40);
     }
     
@@ -593,8 +638,8 @@
     
     size.height = Messagesize.height + Namesize.height + Timesize.height + 48.0f;
     
-    //return size.height;
-    return 150.0f;
+    return size.height;
+    //return 150.0f;
 }
 
 -(IBAction)showSettings:(id)sender{
@@ -607,6 +652,17 @@
     if ([segue.identifier isEqualToString:@"settings"]) {
         ChatSettingsViewController *settingsVC = segue.destinationViewController;
         [settingsVC setChatID:_roomNumber];
+    } else if ([segue.identifier isEqualToString:@"imagePopup"]) {
+        
+    }
+    
+}
+
+- (IBAction)messageTextChanged:(id)sender {
+    if (_messageText.text.length >=1) {
+        _sendBarButton.enabled = true;
+    } else {
+        _sendBarButton.enabled = false;
     }
 }
 

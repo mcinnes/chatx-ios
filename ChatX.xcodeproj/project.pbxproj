@@ -31,6 +31,7 @@
 		C92A22A51E88C84D0080C1D5 /* NSData+SRB64Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = C92A22A01E88C84D0080C1D5 /* NSData+SRB64Additions.m */; settings = {COMPILER_FLAGS = "-v"; }; };
 		C92A22A61E88C84D0080C1D5 /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = C92A22A31E88C84D0080C1D5 /* SRWebSocket.m */; settings = {COMPILER_FLAGS = "-v"; }; };
 		C92A22A91E88CB240080C1D5 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C92A22A81E88CB240080C1D5 /* libicucore.tbd */; };
+		C95ECBC21F4BD1CE00B44F25 /* ImageQueryObject.m in Sources */ = {isa = PBXBuildFile; fileRef = C95ECBC11F4BD1CE00B44F25 /* ImageQueryObject.m */; };
 		C97E64081F3BDC4100BEA6BD /* trending.png in Resources */ = {isa = PBXBuildFile; fileRef = C97E64011F3BDC4100BEA6BD /* trending.png */; };
 		C97E64091F3BDC4100BEA6BD /* myChatsBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = C97E64021F3BDC4100BEA6BD /* myChatsBtn.png */; };
 		C97E640A1F3BDC4100BEA6BD /* findNewBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = C97E64031F3BDC4100BEA6BD /* findNewBtn.png */; };
@@ -109,6 +110,8 @@
 		C92A22A21E88C84D0080C1D5 /* SRWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRWebSocket.h; sourceTree = "<group>"; };
 		C92A22A31E88C84D0080C1D5 /* SRWebSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRWebSocket.m; sourceTree = "<group>"; };
 		C92A22A81E88CB240080C1D5 /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
+		C95ECBC01F4BD1CE00B44F25 /* ImageQueryObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageQueryObject.h; sourceTree = "<group>"; };
+		C95ECBC11F4BD1CE00B44F25 /* ImageQueryObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageQueryObject.m; sourceTree = "<group>"; };
 		C97E64011F3BDC4100BEA6BD /* trending.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trending.png; sourceTree = "<group>"; };
 		C97E64021F3BDC4100BEA6BD /* myChatsBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = myChatsBtn.png; sourceTree = "<group>"; };
 		C97E64031F3BDC4100BEA6BD /* findNewBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = findNewBtn.png; sourceTree = "<group>"; };
@@ -241,6 +244,8 @@
 				C9AEF4AB1EB8B006001BEB07 /* ChatSettingsViewController.m */,
 				C92A22891E88C7450080C1D5 /* SocketViewController.h */,
 				C92A228A1E88C7450080C1D5 /* SocketViewController.m */,
+				C95ECBC01F4BD1CE00B44F25 /* ImageQueryObject.h */,
+				C95ECBC11F4BD1CE00B44F25 /* ImageQueryObject.m */,
 				C9AEF4A21EB8606B001BEB07 /* ProfileViewController.h */,
 				C9AEF4A31EB8606B001BEB07 /* ProfileViewController.m */,
 				C9AEF4A71EB87AA0001BEB07 /* CreateChatViewController.h */,
@@ -554,6 +559,7 @@
 				C92A22731E867B0D0080C1D5 /* ViewController.m in Sources */,
 				C9AEF4A41EB8606B001BEB07 /* ProfileViewController.m in Sources */,
 				C92A229B1E88C8340080C1D5 /* SocketIO.m in Sources */,
+				C95ECBC21F4BD1CE00B44F25 /* ImageQueryObject.m in Sources */,
 				C9C5086E1E8BE3AB00F611C0 /* AdCell.m in Sources */,
 				C9187AC91EBC3F3A009B23A8 /* KYEmbedDrawerControllerSegue.m in Sources */,
 				C9AEF4AC1EB8B006001BEB07 /* ChatSettingsViewController.m in Sources */,
