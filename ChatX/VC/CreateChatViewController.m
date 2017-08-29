@@ -11,7 +11,8 @@
 #import <RKTagsView.h>
 #import "RKCustomButton.h"
 #import <GooglePlaces/GooglePlaces.h>
-@interface CreateChatViewController () <UITextFieldDelegate, RKTagsViewDelegate>
+#import <MapKit/MapKit.h>
+@interface CreateChatViewController () <UITextFieldDelegate, RKTagsViewDelegate, MKMapViewDelegate>
 
 @property (weak, nonatomic) IBOutlet RKTagsView *tagsView;
 
@@ -21,13 +22,40 @@
     CLLocationManager *locationManager;
     CLLocation *location;
     GMSPlacesClient *_placesClient;
-
+    __weak IBOutlet MKMapView *mapView;
+    __weak IBOutlet UISlider *radiusSlider;
     __weak IBOutlet UIImageView *imageView;
+    MKCircle *myCircle;
+}
+
+- (IBAction)mapRegionChanged:(id)sender {
+    MKCircle *circleoverlay = [MKCircle circleWithCenterCoordinate:mapView.userLocation.coordinate radius:radiusSlider.value*100];
+    [circleoverlay setTitle:@"Circle"];
+    [mapView removeOverlays:[mapView overlays]];
+    [mapView addOverlay:circleoverlay];
+}
+
+- (MKOverlayRenderer *) mapView:(MKMapView *)mapView rendererForOverlay:(id)overlay{
+    
+    if([overlay isKindOfClass:[MKCircle class]]){
+    MKCircleRenderer* aRenderer = [[MKCircleRenderer
+                                    alloc]initWithCircle:(MKCircle *)overlay];
+    
+    aRenderer.fillColor = [[UIColor blueColor] colorWithAlphaComponent:0.0];
+    aRenderer.strokeColor = [[UIColor grayColor] colorWithAlphaComponent:0.9];
+    aRenderer.lineWidth = 2;
+    //aRenderer.lineDashPattern = @[@2, @5];
+    aRenderer.alpha = 0.5;
+    
+        return aRenderer;
+    }else{
+        return nil;
+    }
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.tagsView.textField.placeholder = @"Add tag...";
+    self.tagsView.textField.placeholder = @"Add tags...";
     self.tagsView.textField.returnKeyType = UIReturnKeyDone;
     self.tagsView.textField.delegate = self;
     
@@ -40,6 +68,22 @@
     [locationManager startUpdatingLocation];
     
     location = [locationManager location];
+    
+    //Mapview
+    mapView.delegate = self;
+    mapView.showsUserLocation = YES;
+
+    MKCoordinateRegion mapRegion;
+    mapRegion.center = location.coordinate;
+    mapRegion.span.latitudeDelta = 0.02;
+    mapRegion.span.longitudeDelta = 0.02;
+    
+    [mapView setRegion:mapRegion animated: YES];
+    [mapView setMapType:MKMapTypeStandard];
+    
+    myCircle = [MKCircle circleWithCenterCoordinate:location.coordinate radius:radiusSlider.value*100];
+    [mapView addOverlay:myCircle];
+    
     
     _placesClient = [GMSPlacesClient sharedClient];
 
@@ -158,6 +202,7 @@
     }
     return randomString;
 }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

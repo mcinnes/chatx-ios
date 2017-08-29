@@ -80,6 +80,7 @@
     NSLog(@"date %@", date);
     //NSPredicate *pred = [NSPredicate predicateWithFormat:@"music ContainedIn tags"];
     PFQuery *query = [PFQuery queryWithClassName:@"CurrentChats"];
+    
     [query whereKey:@"location" nearGeoPoint:currentLocation withinKilometers:20.0];
     
     //[query whereKey:@"date" equalTo:date];
@@ -93,11 +94,14 @@
                 NSLog(@"%@", object.objectId);
                 //NSString *title = object.objectId;
                 PFGeoPoint *location = [object objectForKey:@"location"];
-                
+                PFFile *imageFile = [object objectForKey:@"ImageIcon"];
+                NSURL *imageFileURL = [[NSURL alloc] initWithString:imageFile.url];
+                NSData *imageData = [NSData dataWithContentsOfURL:imageFileURL];
                 // CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(location.latitude, location.longitude);
                 
                 JPSThumbnail *thumbnail = [[JPSThumbnail alloc] init];
-                thumbnail.image = [UIImage imageNamed:@"empire.jpg"];
+                
+                thumbnail.image = [UIImage imageWithData:imageData];
                 thumbnail.title = [NSString stringWithFormat:@"%@", object[@"ChatName"]];
                 thumbnail.subtitle = [NSString stringWithFormat:@"Current Users: %@", object[@"CurrentCount"]];
                 thumbnail.coordinate = CLLocationCoordinate2DMake(location.latitude, location.longitude);
@@ -209,7 +213,7 @@
     CLLocation *currentLocation = newLocation;
     
     if (currentLocation != nil) {
-  
+        
     }
 }
 

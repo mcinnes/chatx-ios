@@ -42,6 +42,8 @@
     UIView *toolbar;
     UITextView *messageText;
     UIButton *postComment;
+    UIButton *selectImage;
+
 }
 
 
@@ -58,7 +60,7 @@
 
     [self.navigationItem setRightBarButtonItem:itemAboutUs animated:YES];
 
-    [_messageText setPlaceholder:@"Message..."];
+    //[_messageText setPlaceholder:@"Message..."];
     
     _conversationObjects = [NSMutableArray new];
     
@@ -66,7 +68,7 @@
     socketIO = [[SocketIO alloc] initWithDelegate:self];
     
     // connect to the socket.io server that is running locally at port 3000
-    [socketIO connectToHost:@"127.0.0.1" onPort:3000];
+    [socketIO connectToHost:@"10.140.38.172" onPort:3000];
     
     imageQuery = [ImageQueryObject new];
     [self downloadPreviousMessages];
@@ -96,10 +98,7 @@
 
     
     //Tap gesture on table view so that when someone taps on it, the keyboard is hidden
-    //UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
-    
-    //[self.tableView addGestureRecognizer:gestureRecognizer];
-    
+
     [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 
    
@@ -107,34 +106,57 @@
     
     [toolbar setBackgroundColor:[UIColor whiteColor]];
     
-    messageText = [[UITextView alloc]initWithFrame:CGRectMake(8, 8, self.view.frame.size.width - 16 - 75, 34)];
+    messageText = [[UITextView alloc]initWithFrame:CGRectMake(8, 8, self.view.frame.size.width - 16 - 75 - 75, 34)];
     [messageText setBackgroundColor:[UIColor colorWithWhite:0.97 alpha:1]];
     messageText.layer.cornerRadius = 5;
     [messageText setFont:[UIFont fontWithName:@"Avenir Next" size:20]];
     [messageText setTextColor:[UIColor colorWithWhite:0.35 alpha:1]];
     [messageText setDelegate:self];
     
-    postComment = [[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width-75, 0, 75, 50)];
+    postComment = [[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width-75 - 75, 0, 75, 50)];
     [postComment setTitle:@"Post" forState:UIControlStateNormal];
     [postComment.titleLabel setFont:[UIFont fontWithName:@"Avenir Next" size:20]];
     [postComment setTitleColor:[UIColor colorWithRed:(255/255.0) green:(40/255.0) blue:(80/255.0) alpha:1.0] forState:UIControlStateNormal];
-    [postComment addTarget:self action:(s) forControlEvents:<#(UIControlEvents)#>]
+    [postComment addTarget:self action:@selector(snemess:) forControlEvents:UIControlEventTouchUpInside];
+    
+    selectImage = [[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width-75, 0, 75, 50)];
+    [selectImage setTitle:@"📷" forState:UIControlStateNormal];
+    [selectImage.titleLabel setFont:[UIFont fontWithName:@"Avenir Next" size:20]];
+    [selectImage setTitleColor:[UIColor colorWithRed:(255/255.0) green:(40/255.0) blue:(80/255.0) alpha:1.0] forState:UIControlStateNormal];
+    [selectImage addTarget:self action:@selector(selectPhoto:) forControlEvents:UIControlEventTouchUpInside];
+    
     [toolbar addSubview:messageText];
     [toolbar addSubview:postComment];
-    
+    [toolbar addSubview:selectImage];
+
     [[[UIApplication sharedApplication]delegate].window addSubview:toolbar];
-
-
+    //[self.navigationController.view addSubview:toolbar];
+    messageText.inputAccessoryView = toolbar;
 
     
 }
-- (void) dismissKeyboard
-{
-    //[self.messageText resignFirstResponder];
+-(void)viewWillDisappear:(BOOL)animated{
+    [toolbar removeFromSuperview];
 }
-- (void)textViewDidBeginEditing:(UITextView *)textView{
-    //[self edb:self];
+-(void)viewWillAppear:(BOOL)animated{
+    [[[UIApplication sharedApplication]delegate].window addSubview:toolbar];
 }
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark Keyboard/TextEntry
+- (void)textFieldDidBeginEditing:(UITextField *)textField{
+    UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
+    
+    [self.view addGestureRecognizer:gestureRecognizer];
+}
+-(void)dismissKeyboard{
+    [messageText resignFirstResponder];
+}
+
+#pragma mark Message Handling
 -(void)downloadPreviousMessages{
     
     PFQuery *query1 = [PFQuery queryWithClassName:_roomNumber];
@@ -144,168 +166,39 @@
     [query1 findObjectsInBackgroundWithBlock:^(NSArray *messages, NSError *error) {
         
         for (PFObject *object in [messages reverseObjectEnumerator]) {
-            //_textView.text = [_textView.text stringByAppendingString:[NSString stringWithFormat:@"%@: %@\n\n", object[@"nickname"], object[@"msg"]]];
-            
-            
-            
             if ([object[@"type"] isEqualToString:@"image"]){
+                PFFile *imageFile = [object objectForKey:@"image"];
+                NSURL *imageFileURL = [[NSURL alloc] initWithString:imageFile.url];
+                NSData *imageData = [NSData dataWithContentsOfURL:imageFileURL];
                 
                 Text_MessageObject *messageObj = [[Text_MessageObject alloc]initMessageWithName:object[@"nickname"] message:nil time:nil type:object[@"type"] userId:object[@"userId"] image:[imageQuery downloadSingleImagewithID:object[@"image"]]];
-                [self updateTableView:messageObj];
-
                 
+                [self updateTableView:messageObj];
             } else {
                 Text_MessageObject *messageObj = [[Text_MessageObject alloc]initMessageWithName:object[@"nickname"] message:object[@"msg"] time:nil type:object[@"type"] userId:object[@"userId"] image:nil];
                 [self updateTableView:messageObj];
-
             }
-            
         }
-        
     }];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-- (IBAction)selectPhoto:(UIButton *)sender {
-    
-    
-    PHAuthorizationStatus status = [PHPhotoLibrary authorizationStatus];
-    
-    if (status == PHAuthorizationStatusAuthorized) {
-        // Access has been granted.
-        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-        picker.delegate = self;
-        picker.allowsEditing = YES;
-        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-        
-        [self presentViewController:picker animated:YES completion:NULL];
-
-    }
-    
-    else if (status == PHAuthorizationStatusDenied) {
-        // Access has been denied.
-    }
-    
-    else if (status == PHAuthorizationStatusNotDetermined) {
-        
-        // Access has not been determined.
-        [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
-            
-            if (status == PHAuthorizationStatusAuthorized) {
-                // Access has been granted.
-                UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-                picker.delegate = self;
-                picker.allowsEditing = YES;
-                picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-                
-                [self presentViewController:picker animated:YES completion:NULL];
-
-            }
-            
-            else {
-                // Access has been denied.
-            }
-        }];  
-    }
-    
-}
-
--(void) updateTableView:(Text_MessageObject *)msg {
-    [messageText setText:@""];
-    //[self.handler textViewDidChange:self.messageText];
-    
-    [self.tableView beginUpdates];
-    
-    NSIndexPath *row1 = [NSIndexPath indexPathForRow:_conversationObjects.count inSection:0];
-    
-    [_conversationObjects insertObject:msg atIndex:_conversationObjects.count];
-    
-    [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObjects:row1, nil] withRowAnimation:UITableViewRowAnimationBottom];
-    
-    [self.tableView endUpdates];
-    
-    //Always scroll the chat table when the user sends the message
-    if([self.tableView numberOfRowsInSection:0]!=0)
-    {
-        NSIndexPath* ip = [NSIndexPath indexPathForRow:[self.tableView numberOfRowsInSection:0]-1 inSection:0];
-        [self.tableView scrollToRowAtIndexPath:ip atScrollPosition:UITableViewScrollPositionBottom animated:UITableViewRowAnimationLeft];
-    }
 }
 
 - (IBAction)snemess:(id)sender {
     
-    NSLog(@"Current User: %@",[PFUser currentUser]);
-   
     if (photoMessage) {
         [self createImageMessage];
         photoMessage = nil;
     } else {
-        
         NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-        [dict setObject:self.messageText.text forKey:@"msg"];
+        [dict setObject:messageText.text forKey:@"msg"];
         [dict setObject:[[PFUser currentUser]objectId] forKey:@"name"];
         [dict setObject:[PFUser currentUser][@"nickname"] forKey:@"nickname"];
         [dict setObject:[[PFUser currentUser] objectId] forKey:@"userId"];
         [dict setObject:_roomNumber forKey:@"roomNumber"];
         [dict setObject:@"text" forKey:@"type"];
-
-
-
         //send event is like emit
         [socketIO sendEvent:@"send" withData:dict];
     }
-    
-    self.messageText.text = nil;
-
-}
-
--(void)createImageMessage{
-    
-    PFFile *imageFile = [PFFile fileWithName:@"Image.jpg" data:imageData];
-    
-    // Save the image to Parse
-    
-    [imageFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        if (!error) {
-            // The image has now been uploaded to Parse. Associate it with a new object
-            PFObject* newPhotoObject = [PFObject objectWithClassName:@"images"];
-            [newPhotoObject setObject:imageFile forKey:@"image"];
-            [newPhotoObject setObject:[[PFUser currentUser]objectId] forKey:@"userID"];
-            
-            [newPhotoObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                if (!error) {
-                    NSLog(@"Saved: %@", [newPhotoObject objectId]);
-                    
-                    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-
-                    [dict setObject:[[PFUser currentUser]objectId] forKey:@"name"];
-                    [dict setObject:[newPhotoObject objectId] forKey:@"image"];
-                    [dict setObject:[PFUser currentUser][@"nickname"] forKey:@"nickname"];
-                    [dict setObject:[[PFUser currentUser] objectId] forKey:@"userId"];
-                    [dict setObject:_roomNumber forKey:@"roomNumber"];
-                    [dict setObject:@"image" forKey:@"type"];
-
-                    //send event is like emit
-                    [socketIO sendEvent:@"image" withData:dict];
-                }
-                else{
-                    // Error
-                    NSLog(@"Error: %@ %@", error, [error userInfo]);
-                }
-            }];
-        }
-    }progressBlock:^(int percentDone) {
-    
-        
-        NSLog(@"%d", percentDone);
-        [self.messageText setPlaceholder:[NSString stringWithFormat:@"Sending %d%%",percentDone]];
-    }];
-    self.messageText.placeholder = @"Message...";
-    self.sendBarButton.title = @"Send";
-    
+    messageText.text = nil;
 }
 
 # pragma mark socket.IO-objc delegate methods
@@ -463,44 +356,137 @@
                                    NSLog(@"Alert did hide.");
                                }];
 }
-- (IBAction)removeFromSuper:(id)sender {
-  //  [_tb removeFromSuperview];
-    //self.messageText.inputAccessoryView = _tb;
-
-}
-- (IBAction)edb:(id)sender {
-    self.messageText.inputAccessoryView = toolbar;
-    toolbar = [[UIView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height-321, self.view.frame.size.width, 50)];
-
-    [[[UIApplication sharedApplication]delegate].window addSubview:toolbar];
-    
-    
-}
 
 
+#pragma mark Image Methods
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    
-    //
-    UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
+        UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
     imageData = UIImagePNGRepresentation(chosenImage);
     
     //Placeholders
-    self.messageText.placeholder = @"Image Selected";
-    self.sendBarButton.title = @"Upload";
-    
+    //self.messageText.placeholder = @"Image Selected";
+    postComment.titleLabel.text = @"Upload";
     //We are uploading a photo
     photoMessage = true;
     
     //Dismiss Picker
     [picker dismissViewControllerAnimated:YES completion:NULL];
-    
+    [[[UIApplication sharedApplication]delegate].window addSubview:toolbar];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     [picker dismissViewControllerAnimated:YES completion:NULL];
     
 }
+-(void)createImageMessage{
+    
+    PFFile *imageFile = [PFFile fileWithName:@"Image.jpg" data:imageData];
+    
+    // Save the image to Parse
+    
+    [imageFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (!error) {
+            // The image has now been uploaded to Parse. Associate it with a new object
+            PFObject* newPhotoObject = [PFObject objectWithClassName:@"images"];
+            [newPhotoObject setObject:imageFile forKey:@"image"];
+            [newPhotoObject setObject:[[PFUser currentUser]objectId] forKey:@"userID"];
+            
+            [newPhotoObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                if (!error) {
+                    NSLog(@"Saved: %@", [newPhotoObject objectId]);
+                    
+                    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+                    
+                    [dict setObject:[[PFUser currentUser]objectId] forKey:@"name"];
+                    [dict setObject:[newPhotoObject objectId] forKey:@"image"];
+                    [dict setObject:[PFUser currentUser][@"nickname"] forKey:@"nickname"];
+                    [dict setObject:[[PFUser currentUser] objectId] forKey:@"userId"];
+                    [dict setObject:_roomNumber forKey:@"roomNumber"];
+                    [dict setObject:@"image" forKey:@"type"];
+                    
+                    //send event is like emit
+                    [socketIO sendEvent:@"image" withData:dict];
+                }
+                else{
+                    // Error
+                    NSLog(@"Error: %@ %@", error, [error userInfo]);
+                }
+            }];
+        }
+    }progressBlock:^(int percentDone) {
+        
+        
+        NSLog(@"%d", percentDone);
+        //[self.messageText :[NSString stringWithFormat:@"Sending %d%%",percentDone]];
+    }];
+    //messageText.placeholder = @"Message...";
+    self.sendBarButton.title = @"Send";
+    
+}
+- (IBAction)selectPhoto:(UIButton *)sender {
+    
+    PHAuthorizationStatus status = [PHPhotoLibrary authorizationStatus];
+    
+    if (status == PHAuthorizationStatusAuthorized) {
+        // Access has been granted.
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        picker.delegate = self;
+        picker.allowsEditing = YES;
+        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        [toolbar removeFromSuperview];
+        
+        [self presentViewController:picker animated:YES completion:NULL];
+        
+    }
+    else if (status == PHAuthorizationStatusDenied) {
+        // Access has been denied.
+    }
+    else if (status == PHAuthorizationStatusNotDetermined) {
+        
+        // Access has not been determined.
+        [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
+            
+            if (status == PHAuthorizationStatusAuthorized) {
+                // Access has been granted.
+                UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+                picker.delegate = self;
+                picker.allowsEditing = YES;
+                picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+                [toolbar removeFromSuperview];
+                [self presentViewController:picker animated:YES completion:NULL];
+                
+            }
+            
+            else {
+                // Access has been denied.
+            }
+        }];  
+    }
+    
+}
 
+#pragma mark TableView
+-(void) updateTableView:(Text_MessageObject *)msg {
+    [messageText setText:@""];
+    //[self.handler textViewDidChange:self.messageText];
+    
+    [self.tableView beginUpdates];
+    
+    NSIndexPath *row1 = [NSIndexPath indexPathForRow:_conversationObjects.count inSection:0];
+    
+    [_conversationObjects insertObject:msg atIndex:_conversationObjects.count];
+    
+    [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObjects:row1, nil] withRowAnimation:UITableViewRowAnimationBottom];
+    
+    [self.tableView endUpdates];
+    
+    //Always scroll the chat table when the user sends the message
+    if([self.tableView numberOfRowsInSection:0]!=0)
+    {
+        NSIndexPath* ip = [NSIndexPath indexPathForRow:[self.tableView numberOfRowsInSection:0]-1 inSection:0];
+        [self.tableView scrollToRowAtIndexPath:ip atScrollPosition:UITableViewScrollPositionBottom animated:UITableViewRowAnimationLeft];
+    }
+}
 #pragma mark - UITableViewDatasource methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -665,16 +651,21 @@
 
 -(IBAction)showSettings:(id)sender{
     //NSLog(@"Modal");
+    [toolbar removeFromSuperview];
+
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Chat Room Settings"
                                                                    message:nil
                                                             preferredStyle:UIAlertControllerStyleActionSheet]; // 1
     UIAlertAction *firstAction = [UIAlertAction actionWithTitle:@"Subscribe"
                                                           style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
                                                               bool update = [imageQuery subscribeToChatwithID:_roomNumber];
+                                                              [[[UIApplication sharedApplication]delegate].window addSubview:toolbar];
+
                                                           }]; // 2
     UIAlertAction *secondAction = [UIAlertAction actionWithTitle:@"Settings"
                                                            style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
                                                                [self performSegueWithIdentifier:@"settings" sender:self];
+                                                               
                                                            }]; // 3
     
     [alert addAction:firstAction]; // 4
@@ -694,7 +685,7 @@
 }
 
 - (IBAction)messageTextChanged:(id)sender {
-    if (_messageText.text.length >=1) {
+    if (messageText.text.length >=1) {
         _sendBarButton.enabled = true;
     } else {
         _sendBarButton.enabled = false;
@@ -719,7 +710,6 @@
     TGRImageViewController *viewController = [[TGRImageViewController alloc] initWithImage:selectedImage];
     // Don't forget to set ourselves as the transition delegate
     viewController.transitioningDelegate = self;
-    
     [self presentViewController:viewController animated:YES completion:nil];
 }
 

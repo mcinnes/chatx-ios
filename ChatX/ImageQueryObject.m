@@ -33,6 +33,7 @@
     }];;
     return returnImage;
 }
+
 -(bool)subscribeToChatwithID:(NSString *)chatID{
     
     NSString *currentSubscriptions = [PFUser currentUser][@"subscribedChats"];
@@ -49,4 +50,5 @@
     }];
     return status;
 }
+
 @end
