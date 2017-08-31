@@ -320,7 +320,7 @@
         <!--Socket View Controller-->
         <scene sceneID="lZI-kc-Zv3">
             <objects>
-                <viewController id="hde-aU-w8v" customClass="SocketViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChatViewController" id="hde-aU-w8v" customClass="SocketViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="gJB-Mi-rO1"/>
                         <viewControllerLayoutGuide type="bottom" id="1dn-uC-7CA"/>
@@ -330,7 +330,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="38" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="HZm-kd-Zg8">
-                                <rect key="frame" x="4" y="65" width="369" height="557"/>
+                                <rect key="frame" x="4" y="65" width="369" height="315"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -509,12 +509,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W6V-y7-KIM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1768.8" y="1528.785607196402"/>
+            <point key="canvasLocation" x="2866" y="809"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="uKo-hz-uy0">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7op-ct-w4q" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="NavigationController" automaticallyAdjustsScrollViewInsets="NO" id="7op-ct-w4q" customClass="NavigationController" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="rf2-OO-Xr9">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -523,6 +523,7 @@
                     <nil name="viewControllers"/>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="sZe-TB-v2E"/>
+                        <segue destination="hde-aU-w8v" kind="show" identifier="startNewChat" id="7Cn-T4-yCY"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xno-7g-yWL" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -585,4 +586,7 @@
         <image name="myChatsBtn.png" width="129" height="126"/>
         <image name="trending.png" width="128" height="114"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="7Cn-T4-yCY"/>
+    </inferredMetricsTieBreakers>
 </document>

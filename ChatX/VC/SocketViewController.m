@@ -68,7 +68,7 @@
     socketIO = [[SocketIO alloc] initWithDelegate:self];
     
     // connect to the socket.io server that is running locally at port 3000
-    [socketIO connectToHost:@"10.140.38.172" onPort:3000];
+    [socketIO connectToHost:@"10.140.46.88" onPort:3000];
     
     imageQuery = [ImageQueryObject new];
     [self downloadPreviousMessages];
@@ -138,6 +138,15 @@
 -(void)viewWillDisappear:(BOOL)animated{
     [toolbar removeFromSuperview];
 }
+-(void)viewDidDisappear:(BOOL)animated{
+    
+//    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+//    [dict setObject:@"Matt" forKey:@"name"];
+//    [dict setObject:_roomNumber forKey:@"roomNumber"];
+//    [dict setObject:_roomID forKey:@"roomID"];
+//    [socketIO sendEvent:@"disconnect" withData:dict];
+
+}
 -(void)viewWillAppear:(BOOL)animated{
     [[[UIApplication sharedApplication]delegate].window addSubview:toolbar];
 }
@@ -151,6 +160,9 @@
     UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
     
     [self.view addGestureRecognizer:gestureRecognizer];
+    CGRect frame = [self.tableView frame]; //assuming tableViewer is your tableview
+    frame.size.height -= 250; //200 may be a bit off, should be height of keyboard
+    [self.tableView setFrame:frame];
 }
 -(void)dismissKeyboard{
     [messageText resignFirstResponder];
@@ -162,6 +174,7 @@
     PFQuery *query1 = [PFQuery queryWithClassName:_roomNumber];
     [query1 addDescendingOrder:@"createdAt"];
     query1.limit = 20;
+    query1.cachePolicy = kPFCachePolicyCacheElseNetwork;
     
     [query1 findObjectsInBackgroundWithBlock:^(NSArray *messages, NSError *error) {
         
@@ -169,9 +182,11 @@
             if ([object[@"type"] isEqualToString:@"image"]){
                 PFFile *imageFile = [object objectForKey:@"image"];
                 NSURL *imageFileURL = [[NSURL alloc] initWithString:imageFile.url];
-                NSData *imageData = [NSData dataWithContentsOfURL:imageFileURL];
+                NSData *imageData2 = [NSData dataWithContentsOfURL:imageFileURL];
                 
-                Text_MessageObject *messageObj = [[Text_MessageObject alloc]initMessageWithName:object[@"nickname"] message:nil time:nil type:object[@"type"] userId:object[@"userId"] image:[imageQuery downloadSingleImagewithID:object[@"image"]]];
+                Text_MessageObject *messageObj = [[Text_MessageObject alloc]initMessageWithName:object[@"nickname"] message:nil time:nil type:object[@"type"] userId:object[@"userId"] image:[UIImage imageWithData:imageData2]];
+                
+//                  Text_MessageObject *messageObj = [[Text_MessageObject alloc]initMessageWithName:object[@"nickname"] message:nil time:nil type:object[@"type"] userId:object[@"userId"] image:[imageQuery downloadSingleImagewithID:[object objectForKey:@"imageID"]]];
                 
                 [self updateTableView:messageObj];
             } else {
@@ -215,13 +230,14 @@
 - (void) socketIODidConnect:(SocketIO *)socket
 {
 
-    NSString *sessionToken = [[PFUser currentUser]sessionToken];
+    //NSString *sessionToken = [[PFUser currentUser]sessionToken];
 
     NSLog(@"socket.io connected.");
     
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     [dict setObject:@"Matt" forKey:@"name"];
     [dict setObject:_roomNumber forKey:@"roomNumber"];
+    [dict setObject:_roomID forKey:@"roomID"];
     //[dict setObject:sessionToken forKey:@"session-token"];
     //[dict setObject@"userID" forKey[[pfuser currentUser]objectID]];
     [socketIO sendEvent:@"join" withData:dict];
@@ -254,7 +270,7 @@
         
         PFQuery *query1 = [PFQuery queryWithClassName:@"images"];
         
-        [query1 getObjectInBackgroundWithId:tempDict[@"image"] block:^(PFObject *imageObject, NSError *error) {
+        [query1 getObjectInBackgroundWithId:tempDict[@"imageID"] block:^(PFObject *imageObject, NSError *error) {
             
             PFFile *imageFile = imageObject[@"image"];
             
@@ -362,7 +378,6 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
         UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
     imageData = UIImagePNGRepresentation(chosenImage);
-    
     //Placeholders
     //self.messageText.placeholder = @"Image Selected";
     postComment.titleLabel.text = @"Upload";
@@ -398,7 +413,7 @@
                     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
                     
                     [dict setObject:[[PFUser currentUser]objectId] forKey:@"name"];
-                    [dict setObject:[newPhotoObject objectId] forKey:@"image"];
+                    [dict setObject:[newPhotoObject objectId] forKey:@"imageID"];
                     [dict setObject:[PFUser currentUser][@"nickname"] forKey:@"nickname"];
                     [dict setObject:[[PFUser currentUser] objectId] forKey:@"userId"];
                     [dict setObject:_roomNumber forKey:@"roomNumber"];
@@ -667,9 +682,23 @@
                                                                [self performSegueWithIdentifier:@"settings" sender:self];
                                                                
                                                            }]; // 3
+    UIAlertAction *thirdAction = [UIAlertAction actionWithTitle:@"Share"
+                                                           style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+                                                               [self dismissViewControllerAnimated:YES completion:nil];
+                                                               [self shareThis];
+                                                               
+                                                           }]; // 3
+    UIAlertAction *fourthAction = [UIAlertAction actionWithTitle:@"Close"
+                                                           style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+                                                               [self dismissViewControllerAnimated:YES completion:nil];
+                                                               
+                                                           }]; // 3
     
     [alert addAction:firstAction]; // 4
     [alert addAction:secondAction]; // 5
+    [alert addAction:thirdAction]; // 5
+    [alert addAction:fourthAction]; // 5
+
     
     [self presentViewController:alert animated:YES completion:nil]; // 6
 }
@@ -712,5 +741,24 @@
     viewController.transitioningDelegate = self;
     [self presentViewController:viewController animated:YES completion:nil];
 }
-
+-(void)shareThis{
+    NSString *textToShare = @"Come join this awesome chat at";
+    NSURL *myWebsite = [NSURL URLWithString:[NSString stringWithFormat:@"chatx://%@",_roomID]];
+    
+    NSArray *objectsToShare = @[textToShare, myWebsite];
+    
+    UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:objectsToShare applicationActivities:nil];
+    
+    NSArray *excludeActivities = @[UIActivityTypeAirDrop,
+                                   UIActivityTypePrint,
+                                   UIActivityTypeAssignToContact,
+                                   UIActivityTypeSaveToCameraRoll,
+                                   UIActivityTypeAddToReadingList,
+                                   UIActivityTypePostToFlickr,
+                                   UIActivityTypePostToVimeo];
+    
+    activityVC.excludedActivityTypes = excludeActivities;
+    
+    [self presentViewController:activityVC animated:YES completion:nil];
+}
 @end

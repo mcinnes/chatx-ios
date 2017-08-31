@@ -42,6 +42,7 @@
 		C97E64101F3BDC6700BEA6BD /* 20747871_1406543129423188_567774070_o.png in Resources */ = {isa = PBXBuildFile; fileRef = C97E640F1F3BDC6700BEA6BD /* 20747871_1406543129423188_567774070_o.png */; };
 		C9886DDB1E9BAFF90042C5E4 /* ContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = C9886DDA1E9BAFF90042C5E4 /* ContentView.m */; settings = {COMPILER_FLAGS = "-v"; }; };
 		C9886DE31E9BB0140042C5E4 /* ChatCellSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = C9886DE11E9BB0140042C5E4 /* ChatCellSettings.m */; settings = {COMPILER_FLAGS = "-v"; }; };
+		C996E4C51F559FCE00E9A6B6 /* NavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = C996E4C41F559FCE00E9A6B6 /* NavigationController.m */; };
 		C9A084D31F4C48C200786353 /* SubscribedChatsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9A084D21F4C48C200786353 /* SubscribedChatsTableViewController.m */; };
 		C9AAB3401E91243400E37128 /* Image in Resources */ = {isa = PBXBuildFile; fileRef = C9AAB33F1E91243400E37128 /* Image */; };
 		C9AAB3421E91265D00E37128 /* PhotosUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9AAB3411E91265D00E37128 /* PhotosUI.framework */; };
@@ -127,6 +128,8 @@
 		C9886DDF1E9BB0140042C5E4 /* ChatTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChatTableViewCell.m; path = ChatX/ChatTableViewCell.m; sourceTree = SOURCE_ROOT; };
 		C9886DE01E9BB0140042C5E4 /* ChatCellSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChatCellSettings.h; path = ChatX/ChatCellSettings.h; sourceTree = SOURCE_ROOT; };
 		C9886DE11E9BB0140042C5E4 /* ChatCellSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChatCellSettings.m; path = ChatX/ChatCellSettings.m; sourceTree = SOURCE_ROOT; };
+		C996E4C31F559FCE00E9A6B6 /* NavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NavigationController.h; path = VC/NavigationController.h; sourceTree = "<group>"; };
+		C996E4C41F559FCE00E9A6B6 /* NavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NavigationController.m; path = VC/NavigationController.m; sourceTree = "<group>"; };
 		C9A084D11F4C48C100786353 /* SubscribedChatsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SubscribedChatsTableViewController.h; path = VC/SubscribedChatsTableViewController.h; sourceTree = "<group>"; };
 		C9A084D21F4C48C200786353 /* SubscribedChatsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SubscribedChatsTableViewController.m; path = VC/SubscribedChatsTableViewController.m; sourceTree = "<group>"; };
 		C9AAB33F1E91243400E37128 /* Image */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Image; sourceTree = "<group>"; };
@@ -236,6 +239,8 @@
 		C92A226A1E867B0D0080C1D5 /* ChatX */ = {
 			isa = PBXGroup;
 			children = (
+				C996E4C31F559FCE00E9A6B6 /* NavigationController.h */,
+				C996E4C41F559FCE00E9A6B6 /* NavigationController.m */,
 				C9187AC11EBC3F3A009B23A8 /* KYDrawerController */,
 				C9C508671E8B8FEE00F611C0 /* ChatX.entitlements */,
 				C92A226E1E867B0D0080C1D5 /* AppDelegate.h */,
@@ -437,7 +442,7 @@
 				TargetAttributes = {
 					C92A22671E867B0D0080C1D5 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = 24SM6522LU;
+						DevelopmentTeam = F38EY5JYW3;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Keychain = {
@@ -581,6 +586,7 @@
 				C92A22971E88C8340080C1D5 /* SocketIOTransportXHR.m in Sources */,
 				C9187ACA1EBC3F3A009B23A8 /* KYEmbedMainControllerSegue.m in Sources */,
 				C9AAB3471E950D4500E37128 /* Text-MessageObject.m in Sources */,
+				C996E4C51F559FCE00E9A6B6 /* NavigationController.m in Sources */,
 				C92A22A61E88C84D0080C1D5 /* SRWebSocket.m in Sources */,
 				C92A229A1E88C8340080C1D5 /* SocketIOJSONSerialization.m in Sources */,
 			);
@@ -702,7 +708,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = ChatX/ChatX.entitlements;
-				DEVELOPMENT_TEAM = 24SM6522LU;
+				DEVELOPMENT_TEAM = F38EY5JYW3;
 				INFOPLIST_FILE = ChatX/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.mcinnes.ChatX;
@@ -716,7 +722,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = ChatX/ChatX.entitlements;
-				DEVELOPMENT_TEAM = 24SM6522LU;
+				DEVELOPMENT_TEAM = F38EY5JYW3;
 				INFOPLIST_FILE = ChatX/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.mcinnes.ChatX;

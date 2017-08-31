@@ -9,6 +9,8 @@
 #import "AppDelegate.h"
 #import <Parse/Parse.h>
 #import <GooglePlaces/GooglePlaces.h>
+#import "NavigationController.h"
+#import "SocketViewController.h"
 @interface AppDelegate ()
 
 @end
@@ -37,9 +39,32 @@
     
     NSLog(@"host: %@", [url host]);
     
+    PFQuery *chatQuery = [PFQuery queryWithClassName:@"CurrentChats"];
+    PFObject *chatObject = [chatQuery getObjectWithId:[url host]];
+    NSLog(@"%@", chatObject);
+//    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main"
+//                                                             bundle: nil];
+//    
+//     NavigationController *controller = (NavigationController*)[mainStoryboard
+//                                                       instantiateViewControllerWithIdentifier: @"NavigationController"];
+//    controller.chatObject = chatObject;
+//    
+//    [controller performSegueWithIdentifier:@"startNewChat" sender:self];
     //host is the id of the chat
     //make the chat screen open
     
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    
+    SocketViewController *nextview = [storyboard instantiateViewControllerWithIdentifier:@"ChatViewController"];
+    nextview.title = chatObject[@"ChatName"];
+    nextview.roomNumber = chatObject[@"ChatRoomID"];
+    nextview.roomID = chatObject.objectId;
+
+    NavigationController *navigationVC = [[NavigationController alloc] init];
+    
+    self.window.rootViewController = navigationVC;
+    
+    [navigationVC pushViewController:nextview animated:NO];
     
     return YES;
 }

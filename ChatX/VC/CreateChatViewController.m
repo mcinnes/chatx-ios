@@ -12,6 +12,8 @@
 #import "RKCustomButton.h"
 #import <GooglePlaces/GooglePlaces.h>
 #import <MapKit/MapKit.h>
+#import "SocketViewController.h"
+
 @interface CreateChatViewController () <UITextFieldDelegate, RKTagsViewDelegate, MKMapViewDelegate>
 
 @property (weak, nonatomic) IBOutlet RKTagsView *tagsView;
@@ -26,6 +28,8 @@
     __weak IBOutlet UISlider *radiusSlider;
     __weak IBOutlet UIImageView *imageView;
     MKCircle *myCircle;
+    NSString *chatIDString;
+    NSString *roomID;
 }
 
 - (IBAction)mapRegionChanged:(id)sender {
@@ -146,7 +150,7 @@
     
     PFGeoPoint *locationGeo = [PFGeoPoint geoPointWithLocation:location];
     
-    NSString *chatIDString = [self genRandStringLength:15];
+    chatIDString = [self genRandStringLength:15];
     
     PFObject *chatObject = [PFObject objectWithClassName:@"CurrentChats"];
     
@@ -162,9 +166,20 @@
     
     chatObject[@"tags"] = combined;
     
+    chatObject[@"allowedDistance"] = [NSNumber numberWithFloat:radiusSlider.value];
+    
+    chatObject[@"CurrentCount"] = [NSNumber numberWithInt:0];
+    
+    NSData* data = UIImageJPEGRepresentation(imageView.image, 0.5f);
+    PFFile *imageFile = [PFFile fileWithName:@"Image.jpg" data:data];
+    
+    [chatObject setObject:imageFile forKey:@"ImageIcon"];
+    
     [chatObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
             // The object has been saved.
+            roomID = chatObject.objectId;
+            
         } else {
             // There was a problem, check error.description
         }
@@ -177,6 +192,7 @@
     [firstMessageObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
             // The object has been saved.
+            [self.navigationController performSegueWithIdentifier:@"startNewChat" sender:self];
         } else {
             // There was a problem, check error.description
         }
@@ -193,7 +209,11 @@
 //        [tempVC removeFromParentViewController];
 //    }
 //}
+-(void)viewWillDisappear:(BOOL)animated{
+   // UIViewController * viewController = [self.navigationController.viewControllers objectAtIndex:1];
 
+    //[self.navigationController popToViewController:viewController animated:NO];
+}
 - (NSString *)genRandStringLength:(int)len {
     static NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
     NSMutableString *randomString = [NSMutableString stringWithCapacity: len];
@@ -227,5 +247,13 @@
     return customButton;
 }
 
-
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ([segue.identifier isEqualToString:@"startNewChat"]) {
+        SocketViewController *socketVC = segue.destinationViewController;
+        socketVC.title = _nameTextField.text;
+        socketVC.roomNumber = [NSString stringWithFormat:@"%@", chatIDString];
+        //socketVC.roomID = roomID;
+        
+    }
+}
 @end

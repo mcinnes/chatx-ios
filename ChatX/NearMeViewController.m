@@ -23,7 +23,8 @@
     MKMapView *mapView;
     NSString *titleString;
     NSString *roomNumber;
-    
+    NSString *roomID;
+
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [locationManager stopUpdatingLocation];
@@ -90,14 +91,17 @@
         if (!error) {
             // The find succeeded.
             // Do something with the found objects
+            NSLog(@"Map object count %ld",objects.count);
+            
             for (PFObject *object in objects) {
+                
                 NSLog(@"%@", object.objectId);
-                //NSString *title = object.objectId;
+                
                 PFGeoPoint *location = [object objectForKey:@"location"];
                 PFFile *imageFile = [object objectForKey:@"ImageIcon"];
                 NSURL *imageFileURL = [[NSURL alloc] initWithString:imageFile.url];
                 NSData *imageData = [NSData dataWithContentsOfURL:imageFileURL];
-                // CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(location.latitude, location.longitude);
+                
                 
                 JPSThumbnail *thumbnail = [[JPSThumbnail alloc] init];
                 
@@ -105,7 +109,7 @@
                 thumbnail.title = [NSString stringWithFormat:@"%@", object[@"ChatName"]];
                 thumbnail.subtitle = [NSString stringWithFormat:@"Current Users: %@", object[@"CurrentCount"]];
                 thumbnail.coordinate = CLLocationCoordinate2DMake(location.latitude, location.longitude);
-                thumbnail.disclosureBlock = ^{ titleString = thumbnail.title; roomNumber=object[@"ChatRoomID"]; [self showlibchat]; };
+                thumbnail.disclosureBlock = ^{ titleString = thumbnail.title; roomNumber=object[@"ChatRoomID"]; roomID = object.objectId; [self showlibchat]; };
                 
                 [mapview addAnnotation:[JPSThumbnailAnnotation annotationWithThumbnail:thumbnail]];
                 
@@ -221,10 +225,12 @@
     [self performSegueWithIdentifier:@"library" sender:self];
 }
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+   
     if ([segue.identifier isEqualToString:@"library"]) {
         SocketViewController *socketVC = segue.destinationViewController;
         socketVC.title = titleString;
         socketVC.roomNumber = roomNumber;
+        socketVC.roomID = roomID;
         
     }
 }

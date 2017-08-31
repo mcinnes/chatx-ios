@@ -29,7 +29,8 @@
 //@property (retain, nonatomic) IBOutlet UITextField *messageText;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIToolbar *tb;
-@property (weak, nonatomic) NSString *roomNumber;
+@property (strong, nonatomic) NSString *roomNumber;
+@property (strong, nonatomic) NSString *roomID;
 
 //Keyboard
 
