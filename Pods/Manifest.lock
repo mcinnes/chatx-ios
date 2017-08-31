@@ -1,0 +1,47 @@
+PODS:
+  - Bolts/Tasks (1.8.4)
+  - EAIntroView (2.10.0):
+    - EARestrictedScrollView (~> 1.1.0)
+  - EARestrictedScrollView (1.1.0)
+  - GoogleMaps/Base (2.4.0)
+  - GooglePlaces (2.4.0):
+    - GoogleMaps/Base (= 2.4.0)
+  - IODProfanityFilter (1.0.0)
+  - ISMessages (1.2)
+  - JPSThumbnailAnnotation (1.0.0)
+  - Parse (1.15.2):
+    - Bolts/Tasks (~> 1.8)
+  - ParseUI (1.2.0):
+    - Bolts/Tasks (~> 1.3)
+    - Parse (~> 1.9)
+  - RKTagsView (1.3.0)
+  - Vertigo (0.1)
+
+DEPENDENCIES:
+  - EAIntroView
+  - GooglePlaces
+  - IODProfanityFilter
+  - ISMessages
+  - JPSThumbnailAnnotation
+  - Parse
+  - ParseUI
+  - RKTagsView
+  - Vertigo
+
+SPEC CHECKSUMS:
+  Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
+  EAIntroView: 3494b7bbd1212e3a4f7e8d16194a1b00e7b9abb2
+  EARestrictedScrollView: b0c2a3f92fb2610bb44d71c5e4893777c89e45ef
+  GoogleMaps: 8436ab5d1c25e36915b2f7416d0c8e3fa2e76c61
+  GooglePlaces: aafe5990fa7951e98e078761bbdaaf236d7e0c65
+  IODProfanityFilter: 10566999bf48ec8375c7d351d6bf9b6a1219f0cb
+  ISMessages: d39098b48672813d69d30f44da06260b9920fed4
+  JPSThumbnailAnnotation: 4b35e87788d903db3fec294e7ef44136b9f741fb
+  Parse: 7daa8804b876d250a65420534c97d2d786c3b0b4
+  ParseUI: af2eba584799da4a9fbdac0e178662d7438b502e
+  RKTagsView: a2d5b8e4c4a6b2deea56c82968c96509fa7d399d
+  Vertigo: b971aa21e904512cfe387196ccba37df3f9a792e
+
+PODFILE CHECKSUM: 19056d5c8abe853475092f19d327ea5b9ac697fe
+
+COCOAPODS: 1.1.1
