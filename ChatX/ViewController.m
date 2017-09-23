@@ -10,7 +10,7 @@
 #import <Parse/Parse.h>
 #import <ParseUI/ParseUI.h>
 #import "KYDrawerController.h"
-
+#import "LoginViewController.h"
 @interface ViewController () <PFLogInViewControllerDelegate>
 
 @end
@@ -23,11 +23,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 //
+    [PFUser logOut];
     if (![PFUser currentUser]) {
-        PFLogInViewController *logInController = [[PFLogInViewController alloc] init];
+        LoginViewController *logInController = [[LoginViewController alloc] init];
         logInController.delegate = self;
-        logInController.logInView.logo = nil;
-        logInController.fields = PFLogInFieldsUsernameAndPassword | PFLogInFieldsFacebook | PFLogInFieldsSignUpButton | PFLogInFieldsDismissButton;
+        //logInController.logInView.logo = nil;
+        logInController.fields = PFLogInFieldsUsernameAndPassword | PFLogInFieldsLogInButton  | PFLogInFieldsSignUpButton | PFLogInFieldsFacebook;
         
         [self presentViewController:logInController animated:true completion:nil];
     }

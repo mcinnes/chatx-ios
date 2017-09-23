@@ -29,11 +29,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ChatX/VC/SocketViewController.m"
-            timestampString = "525750679.335591"
+            timestampString = "526963678.915647"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "484"
-            endingLineNumber = "484"
+            startingLineNumber = "485"
+            endingLineNumber = "485"
             landmarkName = "-updateTableView:"
             landmarkType = "7">
          </BreakpointContent>
@@ -45,13 +45,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ChatX/VC/SocketViewController.m"
-            timestampString = "525750679.335591"
+            timestampString = "526963678.915647"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "505"
-            endingLineNumber = "505"
-            landmarkName = "@implementation SocketViewController"
-            landmarkType = "3">
+            startingLineNumber = "506"
+            endingLineNumber = "506"
+            landmarkName = "-numberOfSectionsInTableView:"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -61,11 +61,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ChatX/VC/SocketViewController.m"
-            timestampString = "525750679.335591"
+            timestampString = "526963678.915647"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "394"
-            endingLineNumber = "394"
+            startingLineNumber = "395"
+            endingLineNumber = "395"
             landmarkName = "-imagePickerControllerDidCancel:"
             landmarkType = "7">
          </BreakpointContent>
@@ -77,11 +77,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ChatX/VC/SocketViewController.m"
-            timestampString = "525750679.335591"
+            timestampString = "526963678.915647"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "385"
-            endingLineNumber = "385"
+            startingLineNumber = "386"
+            endingLineNumber = "386"
             landmarkName = "-imagePickerController:didFinishPickingMediaWithInfo:"
             landmarkType = "7">
          </BreakpointContent>
@@ -93,11 +93,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ChatX/VC/SocketViewController.m"
-            timestampString = "525750679.335591"
+            timestampString = "526963678.915647"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "253"
-            endingLineNumber = "253"
+            startingLineNumber = "254"
+            endingLineNumber = "254"
             landmarkName = "-socketIO:didReceiveEvent:"
             landmarkType = "7">
          </BreakpointContent>
@@ -109,11 +109,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ChatX/VC/SocketViewController.m"
-            timestampString = "525750679.335591"
+            timestampString = "526963678.915647"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "255"
-            endingLineNumber = "255"
+            startingLineNumber = "256"
+            endingLineNumber = "256"
             landmarkName = "-socketIO:didReceiveEvent:"
             landmarkType = "7">
          </BreakpointContent>
@@ -221,11 +221,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ChatX/NearMeViewController.m"
-            timestampString = "525705074.020709"
+            timestampString = "526959482.223051"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "228"
-            endingLineNumber = "228"
+            startingLineNumber = "271"
+            endingLineNumber = "271"
             landmarkName = "-prepareForSegue:sender:"
             landmarkType = "7">
          </BreakpointContent>

@@ -10,6 +10,7 @@
 #import "JPSThumbnailAnnotation.h"
 #import <Parse/Parse.h>
 #import "SocketViewController.h"
+#import <ISMessages/ISMessages.h>
 
 #define IS_OS_8_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
 
@@ -24,6 +25,7 @@
     NSString *titleString;
     NSString *roomNumber;
     NSString *roomID;
+    bool mapMessageShown;
 
 }
 -(void)viewWillDisappear:(BOOL)animated{
@@ -66,9 +68,50 @@
     
     [mapView setRegion:mapRegion animated: YES];
     [mapView setMapType:MKMapTypeStandard];
-
+    
+    UILongPressGestureRecognizer *tapAndHoldGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapAndHoldGesture:)];
+    tapAndHoldGesture.minimumPressDuration = 0.5;
+    tapAndHoldGesture.allowableMovement = 600;
+    [mapView addGestureRecognizer:tapAndHoldGesture];
+    
+    UIPinchGestureRecognizer *pinchGestureRecognizer = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapAndHoldGesture:)];
+    [mapView addGestureRecognizer:pinchGestureRecognizer];
+    
+    
 }
 
+- (void) handleTapAndHoldGesture:(UILongPressGestureRecognizer *)gestureRecognizer{
+    if (gestureRecognizer.state != UIGestureRecognizerStateEnded) {
+        return;
+    }
+    if (self.navigationController.navigationBar.hidden == true) {
+        self.navigationController.navigationBar.hidden = false;
+    } else {
+        if(!mapMessageShown){
+            [self showMapMessage];
+            mapMessageShown = true;
+        }
+        
+        
+        self.navigationController.navigationBar.hidden = true;
+
+    }
+}
+-(void)showMapMessage{
+    
+    
+    [ISMessages showCardAlertWithTitle:@"Hold the map to show navigation again"
+                               message:@""
+                              duration:3.f
+                           hideOnSwipe:YES
+                             hideOnTap:YES
+                             alertType:ISAlertTypeSuccess
+                         alertPosition:ISAlertPositionTop
+                               didHide:^(BOOL finished) {
+                                   NSLog(@"Alert did hide.");
+                               }];
+    
+}
 -(void)getAnnotations:(CLLocation *)location map:(MKMapView *)mapview {
     
     PFGeoPoint *currentLocation =  [PFGeoPoint geoPointWithLocation:location];
@@ -91,6 +134,8 @@
         if (!error) {
             // The find succeeded.
             // Do something with the found objects
+            query.cachePolicy = kPFCachePolicyCacheThenNetwork;
+            
             NSLog(@"Map object count %ld",objects.count);
             
             for (PFObject *object in objects) {

@@ -68,7 +68,7 @@
     socketIO = [[SocketIO alloc] initWithDelegate:self];
     
     // connect to the socket.io server that is running locally at port 3000
-    [socketIO connectToHost:@"10.140.46.88" onPort:3000];
+    [socketIO connectToHost:@"127.0.0.1" onPort:9393];
     
     imageQuery = [ImageQueryObject new];
     [self downloadPreviousMessages];
@@ -175,7 +175,6 @@
     [query1 addDescendingOrder:@"createdAt"];
     query1.limit = 20;
     query1.cachePolicy = kPFCachePolicyCacheElseNetwork;
-    
     [query1 findObjectsInBackgroundWithBlock:^(NSArray *messages, NSError *error) {
         
         for (PFObject *object in [messages reverseObjectEnumerator]) {
@@ -240,6 +239,7 @@
     [dict setObject:_roomID forKey:@"roomID"];
     //[dict setObject:sessionToken forKey:@"session-token"];
     //[dict setObject@"userID" forKey[[pfuser currentUser]objectID]];
+    
     [socketIO sendEvent:@"join" withData:dict];
 
 }

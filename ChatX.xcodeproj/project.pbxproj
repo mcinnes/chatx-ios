@@ -62,6 +62,8 @@
 		C9D15F121F399FC20006F82F /* ChatReceiveCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9D15F101F399FC20006F82F /* ChatReceiveCell.xib */; };
 		C9D15F151F399FF50006F82F /* ChatTableViewCellXIB.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D15F131F399FF50006F82F /* ChatTableViewCellXIB.m */; settings = {COMPILER_FLAGS = "-v"; }; };
 		C9D15F181F39A0550006F82F /* ImageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D15F171F39A0550006F82F /* ImageTableViewCell.m */; settings = {COMPILER_FLAGS = "-v"; }; };
+		C9FCF7461F712AE100293685 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9FCF7451F712AE100293685 /* LoginViewController.m */; };
+		C9FCF7481F712C7A00293685 /* CHAT X.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C9FCF7471F712C7A00293685 /* CHAT X.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -162,6 +164,9 @@
 		C9D15F141F399FF50006F82F /* ChatTableViewCellXIB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChatTableViewCellXIB.h; path = ChatX/ChatTableViewCellXIB.h; sourceTree = SOURCE_ROOT; };
 		C9D15F161F39A0550006F82F /* ImageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageTableViewCell.h; path = ChatX/ImageTableViewCell.h; sourceTree = SOURCE_ROOT; };
 		C9D15F171F39A0550006F82F /* ImageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageTableViewCell.m; path = ChatX/ImageTableViewCell.m; sourceTree = SOURCE_ROOT; };
+		C9FCF7441F712AE100293685 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = VC/LoginViewController.h; sourceTree = "<group>"; };
+		C9FCF7451F712AE100293685 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = VC/LoginViewController.m; sourceTree = "<group>"; };
+		C9FCF7471F712C7A00293685 /* CHAT X.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "CHAT X.jpg"; sourceTree = "<group>"; };
 		DEEC1907138EDE16A4FCB197 /* libPods-ChatX.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ChatX.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -239,6 +244,7 @@
 		C92A226A1E867B0D0080C1D5 /* ChatX */ = {
 			isa = PBXGroup;
 			children = (
+				C9FCF7471F712C7A00293685 /* CHAT X.jpg */,
 				C996E4C31F559FCE00E9A6B6 /* NavigationController.h */,
 				C996E4C41F559FCE00E9A6B6 /* NavigationController.m */,
 				C9187AC11EBC3F3A009B23A8 /* KYDrawerController */,
@@ -247,6 +253,8 @@
 				C92A226F1E867B0D0080C1D5 /* AppDelegate.m */,
 				C92A22711E867B0D0080C1D5 /* ViewController.h */,
 				C92A22721E867B0D0080C1D5 /* ViewController.m */,
+				C9FCF7441F712AE100293685 /* LoginViewController.h */,
+				C9FCF7451F712AE100293685 /* LoginViewController.m */,
 				C92A22741E867B0D0080C1D5 /* Main.storyboard */,
 				C9AEF4AA1EB8B006001BEB07 /* ChatSettingsViewController.h */,
 				C9AEF4AB1EB8B006001BEB07 /* ChatSettingsViewController.m */,
@@ -494,6 +502,7 @@
 				C97E640E1F3BDC4100BEA6BD /* addBackground.png in Resources */,
 				C97E640D1F3BDC4100BEA6BD /* addBtn.png in Resources */,
 				C97E640B1F3BDC4100BEA6BD /* background.png in Resources */,
+				C9FCF7481F712C7A00293685 /* CHAT X.jpg in Resources */,
 				C92A22781E867B0D0080C1D5 /* Assets.xcassets in Resources */,
 				C92A22761E867B0D0080C1D5 /* Main.storyboard in Resources */,
 				C97E640A1F3BDC4100BEA6BD /* findNewBtn.png in Resources */,
@@ -580,6 +589,7 @@
 				C9AEF4AF1EBAE70F001BEB07 /* RKCustomButton.m in Sources */,
 				C92A22991E88C8340080C1D5 /* SocketIOPacket.m in Sources */,
 				C9187AC01EBC3F1D009B23A8 /* Menu.m in Sources */,
+				C9FCF7461F712AE100293685 /* LoginViewController.m in Sources */,
 				C9D15F181F39A0550006F82F /* ImageTableViewCell.m in Sources */,
 				C92A22701E867B0D0080C1D5 /* AppDelegate.m in Sources */,
 				C92A226D1E867B0D0080C1D5 /* main.m in Sources */,
