@@ -31,6 +31,9 @@
 		C92A22A51E88C84D0080C1D5 /* NSData+SRB64Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = C92A22A01E88C84D0080C1D5 /* NSData+SRB64Additions.m */; settings = {COMPILER_FLAGS = "-v"; }; };
 		C92A22A61E88C84D0080C1D5 /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = C92A22A31E88C84D0080C1D5 /* SRWebSocket.m */; settings = {COMPILER_FLAGS = "-v"; }; };
 		C92A22A91E88CB240080C1D5 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C92A22A81E88CB240080C1D5 /* libicucore.tbd */; };
+		C9567E751F84BEEE00E9A517 /* user.png in Resources */ = {isa = PBXBuildFile; fileRef = C9567E741F84BEEE00E9A517 /* user.png */; };
+		C9567E771F84C16E00E9A517 /* defaultUser.png in Resources */ = {isa = PBXBuildFile; fileRef = C9567E761F84C16E00E9A517 /* defaultUser.png */; };
+		C9567E791F84CB2600E9A517 /* splash.png in Resources */ = {isa = PBXBuildFile; fileRef = C9567E781F84CB2600E9A517 /* splash.png */; };
 		C95ECBC21F4BD1CE00B44F25 /* ImageQueryObject.m in Sources */ = {isa = PBXBuildFile; fileRef = C95ECBC11F4BD1CE00B44F25 /* ImageQueryObject.m */; };
 		C97E64081F3BDC4100BEA6BD /* trending.png in Resources */ = {isa = PBXBuildFile; fileRef = C97E64011F3BDC4100BEA6BD /* trending.png */; };
 		C97E64091F3BDC4100BEA6BD /* myChatsBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = C97E64021F3BDC4100BEA6BD /* myChatsBtn.png */; };
@@ -62,6 +65,12 @@
 		C9D15F121F399FC20006F82F /* ChatReceiveCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9D15F101F399FC20006F82F /* ChatReceiveCell.xib */; };
 		C9D15F151F399FF50006F82F /* ChatTableViewCellXIB.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D15F131F399FF50006F82F /* ChatTableViewCellXIB.m */; settings = {COMPILER_FLAGS = "-v"; }; };
 		C9D15F181F39A0550006F82F /* ImageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D15F171F39A0550006F82F /* ImageTableViewCell.m */; settings = {COMPILER_FLAGS = "-v"; }; };
+		C9FA40451F7CE00F004820A9 /* menu.png in Resources */ = {isa = PBXBuildFile; fileRef = C9FA40441F7CE00F004820A9 /* menu.png */; };
+		C9FA40481F7CE09E004820A9 /* menu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9FA40461F7CE09E004820A9 /* menu@2x.png */; };
+		C9FA40491F7CE09E004820A9 /* menu@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9FA40471F7CE09E004820A9 /* menu@3x.png */; };
+		C9FA404B1F7CE26F004820A9 /* off.png in Resources */ = {isa = PBXBuildFile; fileRef = C9FA404A1F7CE26F004820A9 /* off.png */; };
+		C9FA404E1F7CF790004820A9 /* background-login.png in Resources */ = {isa = PBXBuildFile; fileRef = C9FA404C1F7CF790004820A9 /* background-login.png */; };
+		C9FA404F1F7CF790004820A9 /* logo-login.png in Resources */ = {isa = PBXBuildFile; fileRef = C9FA404D1F7CF790004820A9 /* logo-login.png */; };
 		C9FCF7461F712AE100293685 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9FCF7451F712AE100293685 /* LoginViewController.m */; };
 		C9FCF7481F712C7A00293685 /* CHAT X.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C9FCF7471F712C7A00293685 /* CHAT X.jpg */; };
 /* End PBXBuildFile section */
@@ -114,6 +123,9 @@
 		C92A22A21E88C84D0080C1D5 /* SRWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRWebSocket.h; sourceTree = "<group>"; };
 		C92A22A31E88C84D0080C1D5 /* SRWebSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRWebSocket.m; sourceTree = "<group>"; };
 		C92A22A81E88CB240080C1D5 /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
+		C9567E741F84BEEE00E9A517 /* user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user.png; sourceTree = "<group>"; };
+		C9567E761F84C16E00E9A517 /* defaultUser.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = defaultUser.png; sourceTree = "<group>"; };
+		C9567E781F84CB2600E9A517 /* splash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash.png; sourceTree = "<group>"; };
 		C95ECBC01F4BD1CE00B44F25 /* ImageQueryObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageQueryObject.h; sourceTree = "<group>"; };
 		C95ECBC11F4BD1CE00B44F25 /* ImageQueryObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageQueryObject.m; sourceTree = "<group>"; };
 		C97E64011F3BDC4100BEA6BD /* trending.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trending.png; sourceTree = "<group>"; };
@@ -164,6 +176,12 @@
 		C9D15F141F399FF50006F82F /* ChatTableViewCellXIB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChatTableViewCellXIB.h; path = ChatX/ChatTableViewCellXIB.h; sourceTree = SOURCE_ROOT; };
 		C9D15F161F39A0550006F82F /* ImageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageTableViewCell.h; path = ChatX/ImageTableViewCell.h; sourceTree = SOURCE_ROOT; };
 		C9D15F171F39A0550006F82F /* ImageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageTableViewCell.m; path = ChatX/ImageTableViewCell.m; sourceTree = SOURCE_ROOT; };
+		C9FA40441F7CE00F004820A9 /* menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu.png; sourceTree = "<group>"; };
+		C9FA40461F7CE09E004820A9 /* menu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu@2x.png"; sourceTree = "<group>"; };
+		C9FA40471F7CE09E004820A9 /* menu@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu@3x.png"; sourceTree = "<group>"; };
+		C9FA404A1F7CE26F004820A9 /* off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = off.png; sourceTree = "<group>"; };
+		C9FA404C1F7CF790004820A9 /* background-login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background-login.png"; sourceTree = "<group>"; };
+		C9FA404D1F7CF790004820A9 /* logo-login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo-login.png"; sourceTree = "<group>"; };
 		C9FCF7441F712AE100293685 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = VC/LoginViewController.h; sourceTree = "<group>"; };
 		C9FCF7451F712AE100293685 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = VC/LoginViewController.m; sourceTree = "<group>"; };
 		C9FCF7471F712C7A00293685 /* CHAT X.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "CHAT X.jpg"; sourceTree = "<group>"; };
@@ -288,6 +306,13 @@
 		C92A226B1E867B0D0080C1D5 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				C9567E781F84CB2600E9A517 /* splash.png */,
+				C9567E741F84BEEE00E9A517 /* user.png */,
+				C9FA404C1F7CF790004820A9 /* background-login.png */,
+				C9FA404D1F7CF790004820A9 /* logo-login.png */,
+				C9FA404A1F7CE26F004820A9 /* off.png */,
+				C9FA40461F7CE09E004820A9 /* menu@2x.png */,
+				C9FA40471F7CE09E004820A9 /* menu@3x.png */,
 				C97E63FF1F3BDC2700BEA6BD /* Images */,
 				C9187ABB1EBC3E57009B23A8 /* Menu.h */,
 				C9187ABC1EBC3E57009B23A8 /* Menu.m */,
@@ -336,6 +361,7 @@
 		C97E63FF1F3BDC2700BEA6BD /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				C9FA40441F7CE00F004820A9 /* menu.png */,
 				C97E64001F3BDC3200BEA6BD /* UI */,
 			);
 			name = Images;
@@ -359,6 +385,7 @@
 		C9886DDC1E9BAFFE0042C5E4 /* ChatTable */ = {
 			isa = PBXGroup;
 			children = (
+				C9567E761F84C16E00E9A517 /* defaultUser.png */,
 				C9886DEC1EA8CDBA0042C5E4 /* iMessageBubble using XIB */,
 				C9886DE41E9BB0180042C5E4 /* Cell */,
 				C9886DDD1E9BB0080042C5E4 /* ContentView */,
@@ -450,7 +477,7 @@
 				TargetAttributes = {
 					C92A22671E867B0D0080C1D5 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = F38EY5JYW3;
+						DevelopmentTeam = 24SM6522LU;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Keychain = {
@@ -489,23 +516,32 @@
 			buildActionMask = 2147483647;
 			files = (
 				C9AAB3401E91243400E37128 /* Image in Resources */,
+				C9FA40481F7CE09E004820A9 /* menu@2x.png in Resources */,
 				C92A227B1E867B0D0080C1D5 /* LaunchScreen.storyboard in Resources */,
 				C9D15F111F399FC20006F82F /* ChatSendCell.xib in Resources */,
 				C97E640C1F3BDC4100BEA6BD /* Background copy 2.png in Resources */,
 				C9D15F121F399FC20006F82F /* ChatReceiveCell.xib in Resources */,
 				C97E64081F3BDC4100BEA6BD /* trending.png in Resources */,
 				C92A22881E87F79C0080C1D5 /* empire.jpg in Resources */,
+				C9567E791F84CB2600E9A517 /* splash.png in Resources */,
 				C97E64091F3BDC4100BEA6BD /* myChatsBtn.png in Resources */,
 				C97E64101F3BDC6700BEA6BD /* 20747871_1406543129423188_567774070_o.png in Resources */,
 				C92A22831E867CD10080C1D5 /* GoogleService-Info.plist in Resources */,
+				C9FA404B1F7CE26F004820A9 /* off.png in Resources */,
+				C9FA404F1F7CF790004820A9 /* logo-login.png in Resources */,
 				C9AEF4A61EB8618C001BEB07 /* IMG_6168.JPG in Resources */,
 				C97E640E1F3BDC4100BEA6BD /* addBackground.png in Resources */,
 				C97E640D1F3BDC4100BEA6BD /* addBtn.png in Resources */,
+				C9FA40491F7CE09E004820A9 /* menu@3x.png in Resources */,
 				C97E640B1F3BDC4100BEA6BD /* background.png in Resources */,
 				C9FCF7481F712C7A00293685 /* CHAT X.jpg in Resources */,
 				C92A22781E867B0D0080C1D5 /* Assets.xcassets in Resources */,
+				C9567E771F84C16E00E9A517 /* defaultUser.png in Resources */,
+				C9FA40451F7CE00F004820A9 /* menu.png in Resources */,
 				C92A22761E867B0D0080C1D5 /* Main.storyboard in Resources */,
+				C9FA404E1F7CF790004820A9 /* background-login.png in Resources */,
 				C97E640A1F3BDC4100BEA6BD /* findNewBtn.png in Resources */,
+				C9567E751F84BEEE00E9A517 /* user.png in Resources */,
 				C9D15F0E1F399F340006F82F /* ImageReceiveCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -718,7 +754,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = ChatX/ChatX.entitlements;
-				DEVELOPMENT_TEAM = F38EY5JYW3;
+				DEVELOPMENT_TEAM = 24SM6522LU;
 				INFOPLIST_FILE = ChatX/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.mcinnes.ChatX;
@@ -732,7 +768,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = ChatX/ChatX.entitlements;
-				DEVELOPMENT_TEAM = F38EY5JYW3;
+				DEVELOPMENT_TEAM = 24SM6522LU;
 				INFOPLIST_FILE = ChatX/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.mcinnes.ChatX;

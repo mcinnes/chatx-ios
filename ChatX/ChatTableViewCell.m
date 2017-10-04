@@ -111,7 +111,7 @@ static ChatCellSettings *chatCellSettings = nil;
     [Main addSubview:chatTimeLabel];
     [Main addSubview:chatMessageLabel];
     
-    chatUserImage.image = [UIImage imageNamed:@"defaultUser.png"];
+    chatUserImage.image = [UIImage imageNamed:@"user.png"];
     
     chatNameLabel.text = @"chatNameLabel";
     
@@ -397,8 +397,8 @@ static ChatCellSettings *chatCellSettings = nil;
         }
         else
         {
-            [DownCurve setHidden:NO];
-            [UpCurve setHidden:NO];
+            [DownCurve setHidden:YES];
+            [UpCurve setHidden:YES];
         }
         
         

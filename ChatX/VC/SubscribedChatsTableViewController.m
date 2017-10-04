@@ -30,13 +30,13 @@
     NSLog(@"%@", idString);
     subscribedChatIDArray = [idString componentsSeparatedByString:@","];
 
-    for (NSString *ids in subscribedChatIDArray){
+    for (NSMutableString *ids in subscribedChatIDArray){
         PFQuery *chatDetailsQuery = [PFQuery queryWithClassName:@"currentChats"];
         
         [chatDetailsQuery getObjectInBackgroundWithId:ids block:^(PFObject * _Nullable object, NSError * _Nullable error) {
             if (!error) {
-                [chatNamesArray addObject:object[@"name"]];
-                [currentCountsArray addObject:object[@"currentCount"]];
+                [chatNamesArray addObject:object];
+              //  [currentCountsArray addObject:object[@"currentCount"]];
             }
         }];
     }
@@ -46,6 +46,35 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+-  (id)initWithCoder:(NSCoder *)aDecoder {
+    
+    self = [super initWithClassName:@"groceryList"];
+    
+    self = [super initWithCoder:aDecoder];
+    
+    if (self) {
+        // Custom the table
+        
+        // The className to query on
+        self.parseClassName = @"groceryList";
+        
+        // The key of the PFObject to display in the label of the default cell style
+        self.textKey = @"item";
+        
+        // Uncomment the following line to specify the key of a PFFile on the PFObject to display in the imageView of the default cell style
+        // self.imageKey = @"image";
+        
+        // Whether the built-in pull-to-refresh is enabled
+        self.pullToRefreshEnabled = YES;
+        
+        // Whether the built-in pagination is enabled
+        self.paginationEnabled = YES;
+        
+        // The number of objects to show per page
+        self.objectsPerPage = 25;
+    }
+    return self;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -68,8 +97,8 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"basiccell" forIndexPath:indexPath];
     
     // Configure the cell...
-    cell.textLabel.text = chatNamesArray[indexPath.row];
-    cell.detailTextLabel.text = currentCountsArray[indexPath.row];
+    cell.textLabel.text = [chatNamesArray[indexPath.row] objectForKey:@"name"];
+    //cell.detailTextLabel.text = currentCountsArray[indexPath.row];
     
     return cell;
 }

@@ -12,17 +12,40 @@
 #import "KYDrawerController.h"
 #import "CardCell.h"
 #import <Parse/Parse.h>
-
 @implementation Menu
 
+-(void)viewDidLoad{
+    
+    CAShapeLayer *circle = [CAShapeLayer layer];
+    // Make a circular shape
+    UIBezierPath *circularPath=[UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, _profileImageView.frame.size.width, _profileImageView.frame.size.height) cornerRadius:MAX(_profileImageView.frame.size.width, _profileImageView.frame.size.height)];
+    
+    circle.path = circularPath.CGPath;
+    
+    // Configure the apperence of the circle
+    circle.fillColor = [UIColor blackColor].CGColor;
+    circle.strokeColor = [UIColor blackColor].CGColor;
+    circle.lineWidth = 0;
+    _profileImageView.layer.mask=circle;
+    
+    
+}
 
+-(void)viewDidAppear:(BOOL)animated{
+    if ([PFUser currentUser]) {
+        [_logoutLabel setText:@"Logout"];
+        [_nameLabel setText:[PFUser currentUser][@"name"]];
+    } else {
+        [_logoutLabel setText:@"Login"];
+        [_nameLabel setText:@"Welcome..."];
+    }
+    
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)newIndexPath{
     [tableView deselectRowAtIndexPath:newIndexPath animated:YES];
-    
     KYDrawerController *elDrawer = (KYDrawerController*)self.navigationController.parentViewController;
     
-    NSLog(@"indexpath.row: %ld", (long)newIndexPath.row);
     
     //Case statement here to switch the things
     
@@ -30,8 +53,18 @@
     [elDrawer setDrawerState:KYDrawerControllerDrawerStateClosed animated:YES];
     
     switch (newIndexPath.row) {
-        case 7:
-            [PFUser logOut];
+        case 0:
+            [elDrawer.mainViewController performSegueWithIdentifier:@"profileMenu" sender:self];
+        case 8:
+            if ([PFUser currentUser]) {
+                [PFUser logOut];
+                
+            } else {
+                //[PFUser logInWithUsername:@"matt" password:@"indiana1"];
+                [elDrawer.mainViewController performSegueWithIdentifier:@"loginMenu" sender:self];
+
+            }
+            
             break;
             
         default:

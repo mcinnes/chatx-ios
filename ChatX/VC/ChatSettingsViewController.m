@@ -10,6 +10,7 @@
 #import <Parse/Parse.h>
 
 @interface ChatSettingsViewController ()
+
 @end
 
 @implementation ChatSettingsViewController

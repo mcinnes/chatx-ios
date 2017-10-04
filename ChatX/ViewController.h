@@ -10,7 +10,7 @@
 #import <EAIntroView.h>
 @interface ViewController : UIViewController <EAIntroDelegate>
 
-
+-(void)beginLogin;
 
 @end
 

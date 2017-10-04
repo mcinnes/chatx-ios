@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface SubscribedChatsTableViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate>
+#import <ParseUI.h>
+@interface SubscribedChatsTableViewController : PFQueryTableViewController <UITableViewDataSource, UITableViewDelegate>
 
 @end

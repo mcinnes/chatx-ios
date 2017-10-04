@@ -20,11 +20,11 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ezn-Ev-0fi" userLabel="Bubble">
-                        <rect key="frame" x="8" y="8" width="217" height="76"/>
+                        <rect key="frame" x="8" y="8" width="247" height="76"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sja-XG-I91" userLabel="DownCurve">
                                 <rect key="frame" x="0.0" y="51" width="50" height="25"/>
-                                <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="CVw-Ak-der"/>
                                     <constraint firstAttribute="width" constant="50" id="R5p-p5-Wg7"/>
@@ -36,14 +36,14 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OXo-C5-qhx" userLabel="HidingLayerTop">
-                                <rect key="frame" x="0.0" y="0.0" width="217" height="56"/>
+                                <rect key="frame" x="0.0" y="0.0" width="247" height="56"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bpe-H4-t9v" userLabel="Main">
-                                <rect key="frame" x="30" y="0.0" width="187" height="76"/>
+                                <rect key="frame" x="30" y="0.0" width="217" height="76"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="250" text="chatSendNameLabel" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="220" translatesAutoresizingMaskIntoConstraints="NO" id="m9I-oD-1Ih">
-                                        <rect key="frame" x="16" y="8" width="93.5" height="14"/>
+                                        <rect key="frame" x="16" y="8" width="108.5" height="14"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="155" id="d2E-eg-F23"/>
                                         </constraints>
@@ -57,18 +57,18 @@
                                         </variation>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="chatSendMessageLabel" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="220" translatesAutoresizingMaskIntoConstraints="NO" id="gmw-rX-ZGr">
-                                        <rect key="frame" x="16" y="30" width="155" height="17"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <rect key="frame" x="16" y="30" width="185" height="30"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="749" text="chatSendTimeLabel" textAlignment="right" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="220" translatesAutoresizingMaskIntoConstraints="NO" id="YRH-I5-fqS">
-                                        <rect key="frame" x="16" y="55" width="155" height="13"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="749" text="" textAlignment="right" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="220" translatesAutoresizingMaskIntoConstraints="NO" id="YRH-I5-fqS">
+                                        <rect key="frame" x="16" y="68" width="185" height="0.0"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.87450981140136719" green="0.87058818340301514" blue="0.89803916215896606" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.88235294117647056" green="0.90196078431372551" blue="0.8901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="m9I-oD-1Ih" secondAttribute="trailing" constant="16" id="9T2-nx-LOL"/>
                                     <constraint firstAttribute="trailing" secondItem="gmw-rX-ZGr" secondAttribute="trailing" constant="16" id="FGB-r5-wcO"/>
@@ -127,9 +127,8 @@
                                     <constraint firstAttribute="width" constant="15" id="wEJ-Ra-3AW"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user" translatesAutoresizingMaskIntoConstraints="NO" id="9Dz-YM-PTy" userLabel="chatSendUserImage">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user.png" translatesAutoresizingMaskIntoConstraints="NO" id="9Dz-YM-PTy" userLabel="chatSendUserImage">
                                 <rect key="frame" x="0.0" y="51" width="25" height="25"/>
-                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="25" id="1Iw-Gb-x05"/>
                                     <constraint firstAttribute="height" constant="25" id="3Ca-Ww-P1C"/>
@@ -234,6 +233,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="user" width="25" height="25"/>
+        <image name="user.png" width="64" height="64"/>
     </resources>
 </document>

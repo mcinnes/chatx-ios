@@ -42,13 +42,22 @@
     
     locationManager = [[CLLocationManager alloc] init];
     [locationManager requestWhenInUseAuthorization];
-
+    
 #ifdef __IPHONE_8_0
     if(IS_OS_8_OR_LATER) {
         // Use one or the other, not both. Depending on what you put in info.plist
         //[self.locationManager requestAlwaysAuthorization];
     }
 #endif
+    
+    if ([CLLocationManager locationServicesEnabled]){
+        
+        NSLog(@"Location Services Enabled");
+        
+        if ([CLLocationManager authorizationStatus]==kCLAuthorizationStatusDenied){
+        }
+        
+    }
     
     locationManager.delegate = self;
     locationManager.desiredAccuracy = kCLLocationAccuracyBest;
@@ -128,7 +137,7 @@
     [query whereKey:@"location" nearGeoPoint:currentLocation withinKilometers:20.0];
     
     //[query whereKey:@"date" equalTo:date];
-    query.cachePolicy = kPFCachePolicyCacheThenNetwork;
+    //query.cachePolicy = kPFCachePolicyCacheThenNetwork;
     
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
@@ -267,6 +276,7 @@
 }
 
 -(void)showlibchat{
+    
     [self performSegueWithIdentifier:@"library" sender:self];
 }
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
@@ -276,8 +286,8 @@
         socketVC.title = titleString;
         socketVC.roomNumber = roomNumber;
         socketVC.roomID = roomID;
-        
     }
+    
 }
 -(void)didReceiveMemoryWarning{
     mapView = nil;

@@ -11,6 +11,7 @@
 #import <ParseUI/ParseUI.h>
 #import "KYDrawerController.h"
 #import "LoginViewController.h"
+
 @interface ViewController () <PFLogInViewControllerDelegate>
 
 @end
@@ -23,7 +24,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 //
-    [PFUser logOut];
+    //[PFUser logOut];
     if (![PFUser currentUser]) {
         LoginViewController *logInController = [[LoginViewController alloc] init];
         logInController.delegate = self;
@@ -44,7 +45,7 @@
     
     KYDrawerController *elDrawer = (KYDrawerController*)self.navigationController.parentViewController;
     [elDrawer setDrawerState:KYDrawerControllerDrawerStateOpened animated:YES];
-    
+    elDrawer.navController = self.navigationController;
     
 }
 #pragma mark login delegates

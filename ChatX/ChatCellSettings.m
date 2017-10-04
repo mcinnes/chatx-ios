@@ -126,9 +126,9 @@ static ChatCellSettings *instance = nil;
         receiverBubbleMessageFontWithSize = [UIFont systemFontOfSize:14];
         receiverBubbleTimeFontWithSize = [UIFont systemFontOfSize:11];
         
-        senderBubbleTail = YES;
+        senderBubbleTail = NO;
         
-        receiverBubbleTail = YES;
+        receiverBubbleTail = NO;
     });
     
     return instance;

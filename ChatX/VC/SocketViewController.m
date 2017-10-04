@@ -44,6 +44,7 @@
     UIButton *postComment;
     UIButton *selectImage;
 
+    UITapGestureRecognizer *removeKeyboardGesture;
 }
 
 
@@ -57,6 +58,8 @@
     
     UIBarButtonItem* itemAboutUs =[[UIBarButtonItem alloc]initWithCustomView:infoButton];
 
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Map" style:UIBarButtonItemStylePlain target:nil action:nil];
+
 
     [self.navigationItem setRightBarButtonItem:itemAboutUs animated:YES];
 
@@ -68,7 +71,7 @@
     socketIO = [[SocketIO alloc] initWithDelegate:self];
     
     // connect to the socket.io server that is running locally at port 3000
-    [socketIO connectToHost:@"127.0.0.1" onPort:9393];
+    [socketIO connectToHost:@"socket.chatx.online" onPort:3000];
     
     imageQuery = [ImageQueryObject new];
     [self downloadPreviousMessages];
@@ -138,6 +141,11 @@
 -(void)viewWillDisappear:(BOOL)animated{
     [toolbar removeFromSuperview];
 }
+-(void)textViewDidEndEditing:(UITextView *)textView{
+    //[toolbar removeFromSuperview];
+    
+    [[[UIApplication sharedApplication]delegate].window addSubview:toolbar];
+}
 -(void)viewDidDisappear:(BOOL)animated{
     
 //    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
@@ -148,6 +156,7 @@
 
 }
 -(void)viewWillAppear:(BOOL)animated{
+    [toolbar removeFromSuperview];
     [[[UIApplication sharedApplication]delegate].window addSubview:toolbar];
 }
 - (void)didReceiveMemoryWarning {
@@ -156,17 +165,37 @@
 }
 
 #pragma mark Keyboard/TextEntry
-- (void)textFieldDidBeginEditing:(UITextField *)textField{
-    UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
+- (void)textViewDidBeginEditing:(UITextView *)textView{
+    NSLog(@"didfielddnfdn");
+    self.view.autoresizesSubviews = NO;
+
+    removeKeyboardGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
+    [removeKeyboardGesture setCancelsTouchesInView:NO];
+    [self.view addGestureRecognizer:removeKeyboardGesture];
     
-    [self.view addGestureRecognizer:gestureRecognizer];
     CGRect frame = [self.tableView frame]; //assuming tableViewer is your tableview
     frame.size.height -= 250; //200 may be a bit off, should be height of keyboard
     [self.tableView setFrame:frame];
+    
 }
 -(void)dismissKeyboard{
+    NSLog(@"dismissed");
     [messageText resignFirstResponder];
+    CGRect frame = [self.tableView frame]; //assuming tableViewer is your tableview
+    frame.size.height += 250; //200 may be a bit off, should be height of keyboard
+    [self.tableView setFrame:frame];
+    //[toolbar removeFromSuperview];
+    //[self.view removeGestureRecognizer:removeKeyboardGesture];
+    [messageText endEditing:true];
+    [toolbar setFrame:CGRectMake(0, [[UIApplication sharedApplication]delegate].window.frame.size.height-50, [[UIApplication sharedApplication]delegate].window.frame.size.width, 50)];
+    [[[UIApplication sharedApplication]delegate].window addSubview:toolbar];
+    [messageText setInputAccessoryView:toolbar];
+    
+    
+    
+    //[self.view addSubview:toolbar];
 }
+
 
 #pragma mark Message Handling
 -(void)downloadPreviousMessages{
@@ -197,7 +226,7 @@
 }
 
 - (IBAction)snemess:(id)sender {
-    
+    //[messageText endEditing:true];
     if (photoMessage) {
         [self createImageMessage];
         photoMessage = nil;
@@ -239,7 +268,7 @@
     [dict setObject:_roomID forKey:@"roomID"];
     //[dict setObject:sessionToken forKey:@"session-token"];
     //[dict setObject@"userID" forKey[[pfuser currentUser]objectID]];
-    
+    NSLog(@"%@", dict);
     [socketIO sendEvent:@"join" withData:dict];
 
 }
@@ -247,7 +276,8 @@
 - (void) socketIO:(SocketIO *)socket didReceiveEvent:(SocketIOPacket *)packet
 {
     NSDictionary *tempDict = [packet.args objectAtIndex:0];
- 
+    
+    
 
     if ([packet.name isEqualToString:@"update"]){
         //_textView.text = [_textView.text stringByAppendingString:[NSString stringWithFormat:@"Server-Update: %@\n\n", [packet.args objectAtIndex:0]]];
@@ -316,20 +346,23 @@
     }
     else if ([packet.name isEqualToString:@"chat"]){
         NSLog(@"tempdict: %@", tempDict);
-        NSString *msg = [IODProfanityFilter stringByFilteringString:tempDict[@"msg"]];
         
-        Text_MessageObject *messageObj = [[Text_MessageObject alloc]initMessageWithName:tempDict[@"nickname"] message:msg time:tempDict[@"createdAt"] type:@"text" userId:tempDict[@"userId"] image:NULL];
-        
-       
-        
-        //[_conversationObjects addObject:messageObj];
-        
-        [self updateTableView:messageObj];
+        if([PFUser currentUser][@"profanityFilter"]){
+            NSString *msg = [IODProfanityFilter stringByFilteringString:tempDict[@"msg"]];
+            Text_MessageObject *messageObj = [[Text_MessageObject alloc]initMessageWithName:tempDict[@"nickname"] message:msg time:tempDict[@"createdAt"] type:@"text" userId:tempDict[@"userId"] image:NULL];
+            [self updateTableView:messageObj];
 
+            
+        } else {
+            NSString *msg = tempDict[@"msg"];
+            Text_MessageObject *messageObj = [[Text_MessageObject alloc]initMessageWithName:tempDict[@"nickname"] message:msg time:tempDict[@"createdAt"] type:@"text" userId:tempDict[@"userId"] image:NULL];
+            [self updateTableView:messageObj];
+
+        }
         
     } else {
-        
-        //_textView.text = [_textView.text stringByAppendingString:[NSString stringWithFormat:@"%@\n\n", packet.name]];
+        NSLog(@"No packet rec.(%ld)", _conversationObjects.count);
+
 
     }
     NSLog(@"didReceiveEvent(%ld)", _conversationObjects.count);
@@ -379,19 +412,25 @@
         UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
     imageData = UIImagePNGRepresentation(chosenImage);
     //Placeholders
-    //self.messageText.placeholder = @"Image Selected";
-    postComment.titleLabel.text = @"Upload";
+    messageText.text = @"Image Selected";
+    //postComment.titleLabel.text = @"Upload";
     //We are uploading a photo
     photoMessage = true;
     
     //Dismiss Picker
     [picker dismissViewControllerAnimated:YES completion:NULL];
+    //[toolbar removeFromSuperview];
     [[[UIApplication sharedApplication]delegate].window addSubview:toolbar];
+    [messageText setInputAccessoryView:toolbar];
+
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     [picker dismissViewControllerAnimated:YES completion:NULL];
-    
+    //[toolbar removeFromSuperview];
+    [[[UIApplication sharedApplication]delegate].window addSubview:toolbar];
+    [messageText setInputAccessoryView:toolbar];
+
 }
 -(void)createImageMessage{
     
@@ -421,6 +460,8 @@
                     
                     //send event is like emit
                     [socketIO sendEvent:@"image" withData:dict];
+                    [postComment setTitle:@"Post" forState:UIControlStateNormal];
+
                 }
                 else{
                     // Error
@@ -432,14 +473,18 @@
         
         
         NSLog(@"%d", percentDone);
+
+        [postComment setTitle:[NSString stringWithFormat:@"%d%%",percentDone] forState:UIControlStateNormal];
         //[self.messageText :[NSString stringWithFormat:@"Sending %d%%",percentDone]];
     }];
     //messageText.placeholder = @"Message...";
-    self.sendBarButton.title = @"Send";
-    
+    [postComment setTitle:@"Post" forState:UIControlStateNormal];
+    [messageText setText:@""];
 }
 - (IBAction)selectPhoto:(UIButton *)sender {
-    
+    [messageText endEditing:true];
+    [messageText setInputAccessoryView:NULL];
+    [toolbar removeFromSuperview];
     PHAuthorizationStatus status = [PHPhotoLibrary authorizationStatus];
     
     if (status == PHAuthorizationStatusAuthorized) {
@@ -448,7 +493,7 @@
         picker.delegate = self;
         picker.allowsEditing = YES;
         picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-        [toolbar removeFromSuperview];
+        //[toolbar removeFromSuperview];
         
         [self presentViewController:picker animated:YES completion:NULL];
         
@@ -467,7 +512,7 @@
                 picker.delegate = self;
                 picker.allowsEditing = YES;
                 picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-                [toolbar removeFromSuperview];
+                //[toolbar removeFromSuperview];
                 [self presentViewController:picker animated:YES completion:NULL];
                 
             }
@@ -691,7 +736,9 @@
     UIAlertAction *fourthAction = [UIAlertAction actionWithTitle:@"Close"
                                                            style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
                                                                [self dismissViewControllerAnimated:YES completion:nil];
-                                                               
+                                                               [toolbar removeFromSuperview];
+                                                               [[[UIApplication sharedApplication]delegate].window addSubview:toolbar];
+
                                                            }]; // 3
     
     [alert addAction:firstAction]; // 4
@@ -699,7 +746,7 @@
     [alert addAction:thirdAction]; // 5
     [alert addAction:fourthAction]; // 5
 
-    
+    [toolbar removeFromSuperview];
     [self presentViewController:alert animated:YES completion:nil]; // 6
 }
 
@@ -742,8 +789,8 @@
     [self presentViewController:viewController animated:YES completion:nil];
 }
 -(void)shareThis{
-    NSString *textToShare = @"Come join this awesome chat at";
-    NSURL *myWebsite = [NSURL URLWithString:[NSString stringWithFormat:@"chatx://%@",_roomID]];
+    NSString *textToShare = @"Come join this awesome ChatX room ";
+    NSURL *myWebsite = [NSURL URLWithString:[NSString stringWithFormat:@"http://app.chatx.online/?platform=ios&room=%@",_roomID]];
     
     NSArray *objectsToShare = @[textToShare, myWebsite];
     

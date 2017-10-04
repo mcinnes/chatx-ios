@@ -79,7 +79,7 @@ static NSTimeInterval const kDrawerAnimationDuration = 0.25;
     _containerViewMaxAlpha = kContainerViewMaxAlpha;
     _drawerAnimationDuration = kDrawerAnimationDuration;
     
-    _drawerWidth = 280.0f;
+    _drawerWidth = 220.0f;
     _screenEdgePanGestreEnabled = YES;
     _drawerDirection = KYDrawerControllerDrawerDirectionLeft;
 }

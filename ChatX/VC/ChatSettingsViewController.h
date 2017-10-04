@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface ChatSettingsViewController : UIViewController
+
 @property (weak, nonatomic) NSString *chatID;
+@property (weak, nonatomic) IBOutlet UITableView *profanitySwitch;
 
 @end

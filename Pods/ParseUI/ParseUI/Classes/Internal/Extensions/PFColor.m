@@ -56,9 +56,9 @@
 #pragma mark Buttons
 
 + (UIColor *)loginButtonBackgroundColor {
-    return [UIColor colorWithRed:97.0f/255.0f
-                           green:106.f/255.0f
-                            blue:116.0f/255.0f
+    return [UIColor colorWithRed:21.0f/255.0f
+                           green:168.f/255.0f
+                            blue:165.0f/255.0f
                            alpha:1.0f];
 }
 
@@ -70,16 +70,16 @@
 }
 
 + (UIColor *)facebookButtonBackgroundColor {
-    return [UIColor colorWithRed:58.0f/255.0f
-                           green:89.0f/255.0f
-                            blue:152.0f/255.0f
+    return [UIColor colorWithRed:60.0f/255.0f
+                           green:81.0f/255.0f
+                            blue:147.0f/255.0f
                            alpha:1.0f];
 }
 
 + (UIColor *)twitterButtonBackgroundColor {
-    return [UIColor colorWithRed:45.0f/255.0f
-                           green:170.0f/255.0f
-                            blue:1.0f
+    return [UIColor colorWithRed:60.0f/255.0f
+                           green:81.0f/255.0f
+                            blue:147.0f/255.0f
                            alpha:1.0f];
 }
 

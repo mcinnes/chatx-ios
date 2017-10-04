@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "NavigationController.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @class KYDrawerController;
@@ -54,6 +54,8 @@ typedef NS_ENUM(NSUInteger, KYDrawerControllerDrawerDirection) { KYDrawerControl
 @property (readonly, nonatomic) UIScreenEdgePanGestureRecognizer *screenEdgePanGesture;
 
 @property (readonly, nonatomic) UIPanGestureRecognizer *panGesture;
+
+@property (nonatomic, strong) NavigationController *navController;
 
 - (instancetype)initWithDrawerDirection:(KYDrawerControllerDrawerDirection)drawerDirection drawerWidth:(CGFloat)drawerWidth;
 

@@ -10,7 +10,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NavigationController.h"
 
 @interface Menu : UITableViewController <UITableViewDelegate, UITableViewDataSource>
+
+@property (nonatomic, strong) NavigationController *navController;
+@property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
+@property (weak, nonatomic) IBOutlet UILabel *logoutLabel;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 
 @end

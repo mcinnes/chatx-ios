@@ -179,24 +179,29 @@
         if (succeeded) {
             // The object has been saved.
             roomID = chatObject.objectId;
+            PFObject *firstMessageObject = [PFObject objectWithClassName:chatIDString];
             
+            firstMessageObject[@"nickname"] = @"ChatX";
+            firstMessageObject[@"msg"] = [NSString stringWithFormat:@"Welcome to the %@ chat", _nameTextField.text];
+            [firstMessageObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                if (succeeded) {
+                    // The object has been saved.
+                    [self.navigationController popToRootViewControllerAnimated:YES];
+                } else {
+                    // There was a problem, check error.description
+                    NSLog(@"error %@", error.description);
+                }
+            }];
+            NSLog(@"created chat");
+
         } else {
             // There was a problem, check error.description
+            NSLog(@"error %@", error.description);
+
         }
     }];
     
-    PFObject *firstMessageObject = [PFObject objectWithClassName:chatIDString];
-    
-    firstMessageObject[@"nickname"] = @"ChatX";
-    firstMessageObject[@"msg"] = [NSString stringWithFormat:@"Welcome to the %@ chat", _nameTextField.text];
-    [firstMessageObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        if (succeeded) {
-            // The object has been saved.
-            [self.navigationController performSegueWithIdentifier:@"startNewChat" sender:self];
-        } else {
-            // There was a problem, check error.description
-        }
-    }];
+   
     
 }
 
